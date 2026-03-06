@@ -13,7 +13,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_scopes>
     pub async fn realm_client_scopes_get(
         &self,
         realm: &str,
@@ -21,7 +21,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/client-scopes", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/client-scopes",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -40,7 +43,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclient_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclient_scopes>
     pub async fn realm_client_scopes_post(
         &self,
         realm: &str,
@@ -49,7 +52,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/client-scopes", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/client-scopes",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -67,7 +73,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}`
     pub async fn realm_client_scopes_with_client_scope_id_get(
@@ -102,7 +108,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_scopesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_scopesclient_scope_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/client-scopes/{client-scope-id}`
     pub async fn realm_client_scopes_with_client_scope_id_put(
@@ -138,7 +144,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}`
     pub async fn realm_client_scopes_with_client_scope_id_delete(
@@ -169,7 +175,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-templates`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_templates>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_templates>
     pub async fn realm_client_templates_get(
         &self,
         realm: &str,
@@ -199,7 +205,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/client-templates`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclient_templates>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclient_templates>
     pub async fn realm_client_templates_post(
         &self,
         realm: &str,
@@ -229,7 +235,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}`
     pub async fn realm_client_templates_with_client_scope_id_get(
@@ -264,7 +270,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_templatesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_templatesclient_scope_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/client-templates/{client-scope-id}`
     pub async fn realm_client_templates_with_client_scope_id_put(
@@ -300,7 +306,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}`
     pub async fn realm_client_templates_with_client_scope_id_delete(
@@ -320,6 +326,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
     }
+
 }
 // not all paths processed
-// left 252
+// left 261

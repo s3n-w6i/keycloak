@@ -14,7 +14,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmcomponents>
     pub async fn realm_components_get(
         &self,
         realm: &str,
@@ -25,7 +25,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/components", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/components",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = name {
             builder = builder.query(&[("name", v)]);
@@ -51,7 +54,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmcomponents>
     pub async fn realm_components_post(
         &self,
         realm: &str,
@@ -60,7 +63,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/components", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/components",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -76,7 +82,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
     pub async fn realm_components_with_id_get(
         &self,
         realm: &str,
@@ -86,7 +92,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/components/{id}", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/components/{id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -104,7 +113,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
     pub async fn realm_components_with_id_put(
         &self,
         realm: &str,
@@ -115,7 +124,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(format!("{}/admin/realms/{realm}/components/{id}", self.url))
+            .put(format!(
+                "{}/admin/realms/{realm}/components/{id}",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -133,7 +145,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
     pub async fn realm_components_with_id_delete(
         &self,
         realm: &str,
@@ -143,7 +155,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(format!("{}/admin/realms/{realm}/components/{id}", self.url))
+            .delete(format!(
+                "{}/admin/realms/{realm}/components/{id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
@@ -161,7 +176,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}/sub-component-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
     pub async fn realm_components_with_id_sub_component_types_get(
         &self,
         realm: &str,
@@ -183,6 +198,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
+
 }
 // not all paths processed
-// left 253
+// left 262

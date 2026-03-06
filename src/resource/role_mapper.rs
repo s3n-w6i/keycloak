@@ -13,7 +13,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappings>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappings>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings`
     pub fn groups_with_group_id_role_mappings_get(
@@ -21,7 +21,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         group_id: &'a str,
     ) -> impl Future<Output = Result<MappingsRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_role_mappings_get(self.realm, group_id)
+            .realm_groups_with_group_id_role_mappings_get(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Get realm-level role mappings
@@ -35,16 +38,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     pub fn groups_with_group_id_role_mappings_realm_get(
         &'a self,
         group_id: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_role_mappings_realm_get(self.realm, group_id)
+            .realm_groups_with_group_id_role_mappings_realm_get(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Add realm-level role mappings to the user
@@ -61,7 +66,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
     ///
     /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     pub fn groups_with_group_id_role_mappings_realm_post(
@@ -70,7 +75,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: Vec<RoleRepresentation>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_role_mappings_realm_post(self.realm, group_id, body)
+            .realm_groups_with_group_id_role_mappings_realm_post(
+                self.realm,
+                group_id,
+                body,
+            )
     }
 
     /// Delete realm-level role mappings
@@ -87,7 +96,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     pub fn groups_with_group_id_role_mappings_realm_delete(
@@ -96,7 +105,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: Vec<RoleRepresentation>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_role_mappings_realm_delete(self.realm, group_id, body)
+            .realm_groups_with_group_id_role_mappings_realm_delete(
+                self.realm,
+                group_id,
+                body,
+            )
     }
 
     /// Get realm-level roles that can be mapped
@@ -110,16 +123,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmavailable>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm/available`
     pub fn groups_with_group_id_role_mappings_realm_available_get(
         &'a self,
         group_id: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_role_mappings_realm_available_get(self.realm, group_id)
+            .realm_groups_with_group_id_role_mappings_realm_available_get(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Get effective realm-level role mappings This will recurse all composite roles to get the result.
@@ -134,7 +149,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmcomposite>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm/composite`
     pub fn groups_with_group_id_role_mappings_realm_composite_get(
@@ -158,7 +173,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappings>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappings>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings`
     pub fn users_with_user_id_role_mappings_get(
@@ -166,7 +181,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         user_id: &'a str,
     ) -> impl Future<Output = Result<MappingsRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_users_with_user_id_role_mappings_get(self.realm, user_id)
+            .realm_users_with_user_id_role_mappings_get(
+                self.realm,
+                user_id,
+            )
     }
 
     /// Get realm-level role mappings
@@ -180,16 +198,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealm>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     pub fn users_with_user_id_role_mappings_realm_get(
         &'a self,
         user_id: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_users_with_user_id_role_mappings_realm_get(self.realm, user_id)
+            .realm_users_with_user_id_role_mappings_realm_get(
+                self.realm,
+                user_id,
+            )
     }
 
     /// Add realm-level role mappings to the user
@@ -206,7 +226,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsrealm>
     ///
     /// REST method: `POST /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     pub fn users_with_user_id_role_mappings_realm_post(
@@ -215,7 +235,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: Vec<RoleRepresentation>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_users_with_user_id_role_mappings_realm_post(self.realm, user_id, body)
+            .realm_users_with_user_id_role_mappings_realm_post(
+                self.realm,
+                user_id,
+                body,
+            )
     }
 
     /// Delete realm-level role mappings
@@ -232,7 +256,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsrealm>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     pub fn users_with_user_id_role_mappings_realm_delete(
@@ -241,7 +265,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: Vec<RoleRepresentation>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_users_with_user_id_role_mappings_realm_delete(self.realm, user_id, body)
+            .realm_users_with_user_id_role_mappings_realm_delete(
+                self.realm,
+                user_id,
+                body,
+            )
     }
 
     /// Get realm-level roles that can be mapped
@@ -255,16 +283,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmavailable>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm/available`
     pub fn users_with_user_id_role_mappings_realm_available_get(
         &'a self,
         user_id: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_users_with_user_id_role_mappings_realm_available_get(self.realm, user_id)
+            .realm_users_with_user_id_role_mappings_realm_available_get(
+                self.realm,
+                user_id,
+            )
     }
 
     /// Get effective realm-level role mappings This will recurse all composite roles to get the result.
@@ -279,7 +309,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmcomposite>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm/composite`
     pub fn users_with_user_id_role_mappings_realm_composite_get(
@@ -291,6 +321,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             user_id,
         }
     }
+
 }
 
 // <h4>Role Mapper</h4>
@@ -386,50 +417,52 @@ where
 
 #[cfg(feature = "builder")]
 mod builder {
-    use crate::builder::Builder;
+use crate::builder::Builder;
 
-    use super::*;
+use super::*;
 
-    // <h4>Role Mapper</h4>
-    impl<'a, TS> RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return roles with their attributes
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
+
+// <h4>Role Mapper</h4>
+impl <'a, TS> RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return roles with their attributes
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
+}
 
-    impl<TS> Builder<'_, RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return roles with their attributes
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return roles with their attributes
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
     }
+}
 
-    impl<'a, TS> RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return roles with their attributes
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
+impl <'a, TS> RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return roles with their attributes
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
+}
 
-    impl<TS> Builder<'_, RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return roles with their attributes
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return roles with their attributes
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
     }
+}
+
 }

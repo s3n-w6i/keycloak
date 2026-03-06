@@ -17,7 +17,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/workflows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmworkflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmworkflows>
     pub async fn realm_workflows_get(
         &self,
         realm: &str,
@@ -29,7 +29,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/workflows", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/workflows",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = exact {
             builder = builder.query(&[("exact", v)]);
@@ -60,7 +63,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmworkflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmworkflows>
     pub async fn realm_workflows_post(
         &self,
         realm: &str,
@@ -69,9 +72,51 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/workflows", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/workflows",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
+        let response = builder.send().await?;
+        error_check(response).await.map(From::from)
+    }
+
+    /// Migrate scheduled resources from one step to another
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `from`: A String representing the id of the step to migrate from
+    /// - `to`: A String representing the id of the step to migrate to
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Workflows`
+    ///
+    /// `POST /admin/realms/{realm}/workflows/migrate`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmworkflowsmigrate>
+    pub async fn realm_workflows_migrate_post(
+        &self,
+        realm: &str,
+        from: Option<String>,
+        to: Option<String>,
+    ) -> Result<DefaultResponse, KeycloakError> {
+        let realm = p(realm);
+        let mut builder = self
+            .client
+            .post(format!(
+                "{}/admin/realms/{realm}/workflows/migrate",
+                self.url
+            ))
+            .bearer_auth(self.token_supplier.get(&self.url).await?);
+        if let Some(v) = from {
+            builder = builder.query(&[("from", v)]);
+        }
+        if let Some(v) = to {
+            builder = builder.query(&[("to", v)]);
+        }
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
     }
@@ -87,7 +132,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/workflows/scheduled/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmworkflowsscheduledresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmworkflowsscheduledresource_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/workflows/scheduled/{resource-id}`
     pub async fn realm_workflows_scheduled_with_resource_id_get(
@@ -114,13 +159,13 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// - `realm`: realm name (not id!)
     /// - `id`: Workflow identifier
-    /// - `include_id`: Indicates whether the workflow id should be included in the representation or not - defaults to true
+    /// - `include_id`: Indicates whether the workflow and step ids should be included in the representation or not - defaults to true
     ///
     /// Resource: `Workflows`
     ///
     /// `GET /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmworkflowsid>
     pub async fn realm_workflows_with_id_get(
         &self,
         realm: &str,
@@ -131,7 +176,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/workflows/{id}", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/workflows/{id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = include_id {
             builder = builder.query(&[("includeId", v)]);
@@ -154,7 +202,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmworkflowsid>
     pub async fn realm_workflows_with_id_put(
         &self,
         realm: &str,
@@ -165,7 +213,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(format!("{}/admin/realms/{realm}/workflows/{id}", self.url))
+            .put(format!(
+                "{}/admin/realms/{realm}/workflows/{id}",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -185,7 +236,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmworkflowsid>
     pub async fn realm_workflows_with_id_delete(
         &self,
         realm: &str,
@@ -195,7 +246,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(format!("{}/admin/realms/{realm}/workflows/{id}", self.url))
+            .delete(format!(
+                "{}/admin/realms/{realm}/workflows/{id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
@@ -217,7 +271,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows/{id}/activate/{type_}/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmworkflowsidactivatetyperesourceid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmworkflowsidactivatetyperesourceid>
     ///
     /// REST method: `POST /admin/realms/{realm}/workflows/{id}/activate/{type}/{resourceId}`
     pub async fn realm_workflows_with_id_activate_with_type_with_resource_id_post(
@@ -261,7 +315,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows/{id}/deactivate/{type_}/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmworkflowsiddeactivatetyperesourceid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmworkflowsiddeactivatetyperesourceid>
     ///
     /// REST method: `POST /admin/realms/{realm}/workflows/{id}/deactivate/{type}/{resourceId}`
     pub async fn realm_workflows_with_id_deactivate_with_type_with_resource_id_post(
@@ -285,6 +339,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
     }
+
 }
 // not all paths processed
-// left 251
+// left 259

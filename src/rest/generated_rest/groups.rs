@@ -21,7 +21,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroups>
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_groups_get(
         &self,
@@ -38,7 +38,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/groups", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/groups",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -81,7 +84,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmgroups>
     pub async fn realm_groups_post(
         &self,
         realm: &str,
@@ -90,7 +93,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/groups", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/groups",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -109,7 +115,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupscount>
     pub async fn realm_groups_count_get(
         &self,
         realm: &str,
@@ -119,7 +125,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/groups/count", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/groups/count",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = search {
             builder = builder.query(&[("search", v)]);
@@ -140,7 +149,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}`
     pub async fn realm_groups_with_group_id_get(
@@ -175,7 +184,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}`
     pub async fn realm_groups_with_group_id_put(
@@ -209,7 +218,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}`
     pub async fn realm_groups_with_group_id_delete(
@@ -240,14 +249,14 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `exact`: Boolean which defines whether the params "search" must match exactly or not
     /// - `first`: The position of the first result to be returned (pagination offset).
     /// - `max`: The maximum number of results that are to be returned. Defaults to 10
-    /// - `search`: A String representing either an exact group name or a partial name
-    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+    /// - `search`: A String representing either an exact group name or a partial name, defaults to prefix search.
+    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
     ///
     /// Resource: `Groups`
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/children`
     #[allow(clippy::too_many_arguments)]
@@ -307,7 +316,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/children`
     pub async fn realm_groups_with_group_id_children_post(
@@ -341,7 +350,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub async fn realm_groups_with_group_id_management_permissions_get(
@@ -374,7 +383,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub async fn realm_groups_with_group_id_management_permissions_put(
@@ -411,7 +420,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/members`
     pub async fn realm_groups_with_group_id_members_get(
@@ -443,6 +452,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
+
 }
 // not all paths processed
-// left 250
+// left 259

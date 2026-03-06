@@ -13,7 +13,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-registration-policy/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
     pub async fn realm_client_registration_policy_providers_get(
         &self,
         realm: &str,
@@ -29,6 +29,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
+
 }
 // not all paths processed
-// left 255
+// left 264

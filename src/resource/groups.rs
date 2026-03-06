@@ -20,9 +20,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroups>
-    pub fn groups_get(&'a self) -> RealmGroupsGet<'a, TS> {
-        RealmGroupsGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroups>
+    pub fn groups_get(
+        &'a self,
+    ) -> RealmGroupsGet<'a, TS> {
+        RealmGroupsGet {
+            realm_admin: self,
+        }
     }
 
     /// create or add a top level realm groupSet or create child.
@@ -38,12 +42,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmgroups>
     pub fn groups_post(
         &'a self,
         body: GroupRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_groups_post(self.realm, body)
+        self.admin
+            .realm_groups_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Returns the groups counts.
@@ -58,9 +66,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupscount>
-    pub fn groups_count_get(&'a self) -> RealmGroupsCountGet<'a, TS> {
-        RealmGroupsCountGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupscount>
+    pub fn groups_count_get(
+        &'a self,
+    ) -> RealmGroupsCountGet<'a, TS> {
+        RealmGroupsCountGet {
+            realm_admin: self,
+        }
     }
 
     /// Parameters:
@@ -72,7 +84,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_get(
@@ -80,7 +92,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         group_id: &'a str,
     ) -> impl Future<Output = Result<GroupRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_get(self.realm, group_id)
+            .realm_groups_with_group_id_get(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Update group, ignores subgroups.
@@ -97,7 +112,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_put(
@@ -106,7 +121,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: GroupRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_put(self.realm, group_id, body)
+            .realm_groups_with_group_id_put(
+                self.realm,
+                group_id,
+                body,
+            )
     }
 
     /// Parameters:
@@ -120,7 +139,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_delete(
@@ -128,7 +147,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         group_id: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_delete(self.realm, group_id)
+            .realm_groups_with_group_id_delete(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Return a paginated list of subgroups that have a parent group corresponding to the group on the URL
@@ -141,14 +163,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     /// - `exact`: Boolean which defines whether the params "search" must match exactly or not
     /// - `first`: The position of the first result to be returned (pagination offset).
     /// - `max`: The maximum number of results that are to be returned. Defaults to 10
-    /// - `search`: A String representing either an exact group name or a partial name
-    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+    /// - `search`: A String representing either an exact group name or a partial name, defaults to prefix search.
+    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
     ///
     /// Resource: `Groups`
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/children`
     pub fn groups_with_group_id_children_get(
@@ -175,7 +197,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/children`
     pub fn groups_with_group_id_children_post(
@@ -184,7 +206,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: GroupRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_children_post(self.realm, group_id, body)
+            .realm_groups_with_group_id_children_post(
+                self.realm,
+                group_id,
+                body,
+            )
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -198,16 +224,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub fn groups_with_group_id_management_permissions_get(
         &'a self,
         group_id: &'a str,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_management_permissions_get(self.realm, group_id)
+            .realm_groups_with_group_id_management_permissions_get(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -222,17 +250,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub fn groups_with_group_id_management_permissions_put(
         &'a self,
         group_id: &'a str,
         body: ManagementPermissionReference,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_groups_with_group_id_management_permissions_put(self.realm, group_id, body)
+            .realm_groups_with_group_id_management_permissions_put(
+                self.realm,
+                group_id,
+                body,
+            )
     }
 
     /// Get users Returns a stream of users, filtered according to query parameters
@@ -249,7 +280,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/members`
     pub fn groups_with_group_id_members_get(
@@ -261,6 +292,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             group_id,
         }
     }
+
 }
 
 // <h4>Groups</h4>
@@ -301,17 +333,19 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             sub_groups_count,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_groups_get(
-            self.realm_admin.realm,
-            brief_representation,
-            exact,
-            first,
-            max,
-            populate_hierarchy,
-            q,
-            search,
-            sub_groups_count,
-        )
+        self.realm_admin
+            .admin
+            .realm_groups_get(
+                self.realm_admin.realm,
+                brief_representation,
+                exact,
+                first,
+                max,
+                populate_hierarchy,
+                q,
+                search,
+                sub_groups_count,
+            )
     }
 }
 
@@ -345,11 +379,18 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { search, top }: Self::Args,
+        Self::Args {
+            search,
+            top,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
-            .realm_groups_count_get(self.realm_admin.realm, search, top)
+            .realm_groups_count_get(
+                self.realm_admin.realm,
+                search,
+                top,
+            )
     }
 }
 
@@ -380,9 +421,9 @@ pub struct RealmGroupsWithGroupIdChildrenGetArgs {
     pub first: Option<i32>,
     /// The maximum number of results that are to be returned. Defaults to 10
     pub max: Option<i32>,
-    /// A String representing either an exact group name or a partial name
+    /// A String representing either an exact group name or a partial name, defaults to prefix search.
     pub search: Option<String>,
-    /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+    /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
     pub sub_groups_count: Option<bool>,
 }
 
@@ -484,209 +525,211 @@ where
 
 #[cfg(feature = "builder")]
 mod builder {
-    use crate::builder::Builder;
+use crate::builder::Builder;
 
-    use super::*;
+use super::*;
 
-    // <h4>Groups</h4>
-    impl<'a, TS> RealmGroupsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn populate_hierarchy(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().populate_hierarchy(value)
-        }
-        pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().q(value)
-        }
-        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().search(value)
-        }
-        /// Boolean which defines whether to return the count of subgroups for each group (default: true
-        pub fn sub_groups_count(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().sub_groups_count(value)
-        }
+
+// <h4>Groups</h4>
+impl <'a, TS> RealmGroupsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
-
-    impl<TS> Builder<'_, RealmGroupsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn populate_hierarchy(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.populate_hierarchy = value.into();
-            self
-        }
-        pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.q = value.into();
-            self
-        }
-        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.search = value.into();
-            self
-        }
-        /// Boolean which defines whether to return the count of subgroups for each group (default: true
-        pub fn sub_groups_count(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.sub_groups_count = value.into();
-            self
-        }
+    pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact(value)
     }
-
-    impl<'a, TS> RealmGroupsCountGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().search(value)
-        }
-        pub fn top(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().top(value)
-        }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
     }
-
-    impl<TS> Builder<'_, RealmGroupsCountGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.search = value.into();
-            self
-        }
-        pub fn top(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.top = value.into();
-            self
-        }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
     }
-
-    impl<'a, TS> RealmGroupsWithGroupIdChildrenGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Boolean which defines whether brief groups representations are returned or not (default: false)
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        /// Boolean which defines whether the params "search" must match exactly or not
-        pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact(value)
-        }
-        /// The position of the first result to be returned (pagination offset).
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// The maximum number of results that are to be returned. Defaults to 10
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        /// A String representing either an exact group name or a partial name
-        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().search(value)
-        }
-        /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
-        pub fn sub_groups_count(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().sub_groups_count(value)
-        }
+    pub fn populate_hierarchy(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().populate_hierarchy(value)
     }
-
-    impl<TS> Builder<'_, RealmGroupsWithGroupIdChildrenGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Boolean which defines whether brief groups representations are returned or not (default: false)
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        /// Boolean which defines whether the params "search" must match exactly or not
-        pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact = value.into();
-            self
-        }
-        /// The position of the first result to be returned (pagination offset).
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// The maximum number of results that are to be returned. Defaults to 10
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        /// A String representing either an exact group name or a partial name
-        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.search = value.into();
-            self
-        }
-        /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
-        pub fn sub_groups_count(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.sub_groups_count = value.into();
-            self
-        }
+    pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().q(value)
     }
-
-    impl<'a, TS> RealmGroupsWithGroupIdMembersGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        /// Pagination offset
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
+    pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().search(value)
     }
-
-    impl<TS> Builder<'_, RealmGroupsWithGroupIdMembersGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        /// Pagination offset
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
+    /// Boolean which defines whether to return the count of subgroups for each group (default: true
+    pub fn sub_groups_count(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().sub_groups_count(value)
     }
+}
+
+impl<TS> Builder<'_, RealmGroupsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
+    }
+    pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn populate_hierarchy(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.populate_hierarchy = value.into();
+        self
+    }
+    pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.q = value.into();
+        self
+    }
+    pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.search = value.into();
+        self
+    }
+    /// Boolean which defines whether to return the count of subgroups for each group (default: true
+    pub fn sub_groups_count(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.sub_groups_count = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmGroupsCountGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().search(value)
+    }
+    pub fn top(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().top(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmGroupsCountGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.search = value.into();
+        self
+    }
+    pub fn top(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.top = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmGroupsWithGroupIdChildrenGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Boolean which defines whether brief groups representations are returned or not (default: false)
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
+    }
+    /// Boolean which defines whether the params "search" must match exactly or not
+    pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact(value)
+    }
+    /// The position of the first result to be returned (pagination offset).
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// The maximum number of results that are to be returned. Defaults to 10
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    /// A String representing either an exact group name or a partial name, defaults to prefix search.
+    pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().search(value)
+    }
+    /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
+    pub fn sub_groups_count(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().sub_groups_count(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmGroupsWithGroupIdChildrenGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Boolean which defines whether brief groups representations are returned or not (default: false)
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
+    }
+    /// Boolean which defines whether the params "search" must match exactly or not
+    pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact = value.into();
+        self
+    }
+    /// The position of the first result to be returned (pagination offset).
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// The maximum number of results that are to be returned. Defaults to 10
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    /// A String representing either an exact group name or a partial name, defaults to prefix search.
+    pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.search = value.into();
+        self
+    }
+    /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
+    pub fn sub_groups_count(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.sub_groups_count = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmGroupsWithGroupIdMembersGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
+    }
+    /// Pagination offset
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmGroupsWithGroupIdMembersGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
+    }
+    /// Pagination offset
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+}
+
 }

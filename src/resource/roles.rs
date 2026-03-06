@@ -17,7 +17,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidroles>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidroles>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles`
     pub fn clients_with_client_uuid_roles_get(
@@ -44,7 +44,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidroles>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidroles>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/roles`
     pub fn clients_with_client_uuid_roles_post(
@@ -53,7 +53,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: RoleRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_roles_post(self.realm, client_uuid, body)
+            .realm_clients_with_client_uuid_roles_post(
+                self.realm,
+                client_uuid,
+                body,
+            )
     }
 
     /// Get a role by name
@@ -68,7 +72,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_name>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     pub fn clients_with_client_uuid_roles_with_role_name_get(
@@ -99,7 +103,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_name>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     pub fn clients_with_client_uuid_roles_with_role_name_put(
@@ -131,7 +135,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_name>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     pub fn clients_with_client_uuid_roles_with_role_name_delete(
@@ -159,15 +163,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_get(
         &'a self,
         client_uuid: &'a str,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_roles_with_role_name_composites_get(
                 self.realm,
@@ -191,7 +194,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_post(
@@ -224,7 +227,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_delete(
@@ -247,27 +250,29 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `client_uuid`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
+    /// - `target_client_uuid`
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/clients/{client_uuid}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/clients/{target_client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesclientsclient_uuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesclientstargetclientuuid>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/clients/{client-uuid}`
-    pub fn clients_with_client_uuid_roles_with_role_name_composites_clients_with_client_uuid_get(
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/clients/{targetClientUuid}`
+    pub fn clients_with_client_uuid_roles_with_role_name_composites_clients_with_target_client_uuid_get(
         &'a self,
         client_uuid: &'a str,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+        target_client_uuid: &'a str,
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_roles_with_role_name_composites_clients_with_client_uuid_get(
+            .realm_clients_with_client_uuid_roles_with_role_name_composites_clients_with_target_client_uuid_get(
                 self.realm,
                 client_uuid,
                 role_name,
+                target_client_uuid,
             )
     }
 
@@ -283,15 +288,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesrealm>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/realm`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_realm_get(
         &'a self,
         client_uuid: &'a str,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_roles_with_role_name_composites_realm_get(
                 self.realm,
@@ -315,7 +319,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namegroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namegroups>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/groups`
     pub fn clients_with_client_uuid_roles_with_role_name_groups_get(
@@ -342,15 +346,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/management/permissions`
     pub fn clients_with_client_uuid_roles_with_role_name_management_permissions_get(
         &'a self,
         client_uuid: &'a str,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_roles_with_role_name_management_permissions_get(
                 self.realm,
@@ -372,7 +375,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/management/permissions`
     pub fn clients_with_client_uuid_roles_with_role_name_management_permissions_put(
@@ -380,8 +383,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
         role_name: &'a str,
         body: ManagementPermissionReference,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_roles_with_role_name_management_permissions_put(
                 self.realm,
@@ -406,7 +408,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_nameusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_nameusers>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/users`
     pub fn clients_with_client_uuid_roles_with_role_name_users_get(
@@ -435,9 +437,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmroles>
-    pub fn roles_get(&'a self) -> RealmRolesGet<'a, TS> {
-        RealmRolesGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmroles>
+    pub fn roles_get(
+        &'a self,
+    ) -> RealmRolesGet<'a, TS> {
+        RealmRolesGet {
+            realm_admin: self,
+        }
     }
 
     /// Create a new role for the realm or client
@@ -453,12 +459,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmroles>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmroles>
     pub fn roles_post(
         &'a self,
         body: RoleRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_roles_post(self.realm, body)
+        self.admin
+            .realm_roles_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Get a role by name
@@ -472,7 +482,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmrolesrole_name>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}`
     pub fn roles_with_role_name_get(
@@ -480,7 +490,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         role_name: &'a str,
     ) -> impl Future<Output = Result<RoleRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_get(self.realm, role_name)
+            .realm_roles_with_role_name_get(
+                self.realm,
+                role_name,
+            )
     }
 
     /// Update a role by name
@@ -497,7 +510,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmrolesrole_name>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles/{role-name}`
     pub fn roles_with_role_name_put(
@@ -506,7 +519,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: RoleRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_put(self.realm, role_name, body)
+            .realm_roles_with_role_name_put(
+                self.realm,
+                role_name,
+                body,
+            )
     }
 
     /// Delete a role by name
@@ -522,7 +539,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmrolesrole_name>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles/{role-name}`
     pub fn roles_with_role_name_delete(
@@ -530,7 +547,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         role_name: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_delete(self.realm, role_name)
+            .realm_roles_with_role_name_delete(
+                self.realm,
+                role_name,
+            )
     }
 
     /// Get composites of the role
@@ -544,16 +564,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecomposites>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites`
     pub fn roles_with_role_name_composites_get(
         &'a self,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_composites_get(self.realm, role_name)
+            .realm_roles_with_role_name_composites_get(
+                self.realm,
+                role_name,
+            )
     }
 
     /// Add a composite to the role
@@ -570,7 +592,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmrolesrole_namecomposites>
     ///
     /// REST method: `POST /admin/realms/{realm}/roles/{role-name}/composites`
     pub fn roles_with_role_name_composites_post(
@@ -579,7 +601,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: Vec<RoleRepresentation>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_composites_post(self.realm, role_name, body)
+            .realm_roles_with_role_name_composites_post(
+                self.realm,
+                role_name,
+                body,
+            )
     }
 
     /// Remove roles from the role's composite
@@ -596,7 +622,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmrolesrole_namecomposites>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles/{role-name}/composites`
     pub fn roles_with_role_name_composites_delete(
@@ -605,7 +631,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: Vec<RoleRepresentation>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_composites_delete(self.realm, role_name, body)
+            .realm_roles_with_role_name_composites_delete(
+                self.realm,
+                role_name,
+                body,
+            )
     }
 
     /// Get client-level roles for the client that are in the role's composite
@@ -613,27 +643,26 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `client_uuid`
     /// - `role_name`: role's name (not id!)
+    /// - `target_client_uuid`
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/roles/{role_name}/composites/clients/{client_uuid}`
+    /// `GET /admin/realms/{realm}/roles/{role_name}/composites/clients/{target_client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesclientsclient_uuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesclientstargetclientuuid>
     ///
-    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/clients/{client-uuid}`
-    pub fn roles_with_role_name_composites_clients_with_client_uuid_get(
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/clients/{targetClientUuid}`
+    pub fn roles_with_role_name_composites_clients_with_target_client_uuid_get(
         &'a self,
-        client_uuid: &'a str,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+        target_client_uuid: &'a str,
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_composites_clients_with_client_uuid_get(
+            .realm_roles_with_role_name_composites_clients_with_target_client_uuid_get(
                 self.realm,
-                client_uuid,
                 role_name,
+                target_client_uuid,
             )
     }
 
@@ -648,16 +677,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/composites/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesrealm>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/realm`
     pub fn roles_with_role_name_composites_realm_get(
         &'a self,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<RoleRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_composites_realm_get(self.realm, role_name)
+            .realm_roles_with_role_name_composites_realm_get(
+                self.realm,
+                role_name,
+            )
     }
 
     /// Returns a stream of groups that have the specified role name
@@ -674,7 +705,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmrolesrole_namegroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmrolesrole_namegroups>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/groups`
     pub fn roles_with_role_name_groups_get(
@@ -698,16 +729,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmrolesrole_namemanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/management/permissions`
     pub fn roles_with_role_name_management_permissions_get(
         &'a self,
         role_name: &'a str,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_management_permissions_get(self.realm, role_name)
+            .realm_roles_with_role_name_management_permissions_get(
+                self.realm,
+                role_name,
+            )
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
@@ -722,17 +755,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmrolesrole_namemanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles/{role-name}/management/permissions`
     pub fn roles_with_role_name_management_permissions_put(
         &'a self,
         role_name: &'a str,
         body: ManagementPermissionReference,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_roles_with_role_name_management_permissions_put(self.realm, role_name, body)
+            .realm_roles_with_role_name_management_permissions_put(
+                self.realm,
+                role_name,
+                body,
+            )
     }
 
     /// Returns a stream of users that have the specified role name.
@@ -749,7 +785,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmrolesrole_nameusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmrolesrole_nameusers>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/users`
     pub fn roles_with_role_name_users_get(
@@ -761,6 +797,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             role_name,
         }
     }
+
 }
 
 // <h4>Roles</h4>
@@ -960,13 +997,15 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             search,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_roles_get(
-            self.realm_admin.realm,
-            brief_representation,
-            first,
-            max,
-            search,
-        )
+        self.realm_admin
+            .admin
+            .realm_roles_get(
+                self.realm_admin.realm,
+                brief_representation,
+                first,
+                max,
+                search,
+            )
     }
 }
 
@@ -1066,13 +1105,15 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             max,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_roles_with_role_name_users_get(
-            self.realm_admin.realm,
-            self.role_name,
-            brief_representation,
-            first,
-            max,
-        )
+        self.realm_admin
+            .admin
+            .realm_roles_with_role_name_users_get(
+                self.realm_admin.realm,
+                self.role_name,
+                brief_representation,
+                first,
+                max,
+            )
     }
 }
 
@@ -1089,244 +1130,246 @@ where
 
 #[cfg(feature = "builder")]
 mod builder {
-    use crate::builder::Builder;
+use crate::builder::Builder;
 
-    use super::*;
+use super::*;
 
-    // <h4>Roles</h4>
-    impl<'a, TS> RealmClientsWithClientUuidRolesGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().search(value)
-        }
+
+// <h4>Roles</h4>
+impl <'a, TS> RealmClientsWithClientUuidRolesGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidRolesGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.search = value.into();
-            self
-        }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return a full representation of the {@code GroupRepresentation} objects.
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return a full representation of the {@code GroupRepresentation} objects.
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
+    pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().search(value)
     }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Boolean which defines whether brief representations are returned (default: false)
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidRolesGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
     }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.search = value.into();
+        self
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Boolean which defines whether brief representations are returned (default: false)
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return a full representation of the {@code GroupRepresentation} objects.
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+}
 
-    impl<'a, TS> RealmRolesGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().search(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return a full representation of the {@code GroupRepresentation} objects.
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
     }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+}
 
-    impl<TS> Builder<'_, RealmRolesGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.search = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Boolean which defines whether brief representations are returned (default: false)
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+}
 
-    impl<'a, TS> RealmRolesWithRoleNameGroupsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return a full representation of the {@code GroupRepresentation} objects.
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Boolean which defines whether brief representations are returned (default: false)
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
     }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+}
 
-    impl<TS> Builder<'_, RealmRolesWithRoleNameGroupsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// if false, return a full representation of the {@code GroupRepresentation} objects.
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
+impl <'a, TS> RealmRolesGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().search(value)
+    }
+}
 
-    impl<'a, TS> RealmRolesWithRoleNameUsersGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Boolean which defines whether brief representations are returned (default: false)
-        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().brief_representation(value)
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
+impl<TS> Builder<'_, RealmRolesGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
     }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.search = value.into();
+        self
+    }
+}
 
-    impl<TS> Builder<'_, RealmRolesWithRoleNameUsersGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Boolean which defines whether brief representations are returned (default: false)
-        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.brief_representation = value.into();
-            self
-        }
-        /// first result to return. Ignored if negative or {@code null}.
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// maximum number of results to return. Ignored if negative or {@code null}.
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
+impl <'a, TS> RealmRolesWithRoleNameGroupsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return a full representation of the {@code GroupRepresentation} objects.
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
     }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmRolesWithRoleNameGroupsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// if false, return a full representation of the {@code GroupRepresentation} objects.
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
+    }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmRolesWithRoleNameUsersGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Boolean which defines whether brief representations are returned (default: false)
+    pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().brief_representation(value)
+    }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmRolesWithRoleNameUsersGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Boolean which defines whether brief representations are returned (default: false)
+    pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.brief_representation = value.into();
+        self
+    }
+    /// first result to return. Ignored if negative or {@code null}.
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// maximum number of results to return. Ignored if negative or {@code null}.
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+}
+
 }

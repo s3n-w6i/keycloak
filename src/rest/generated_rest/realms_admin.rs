@@ -13,14 +13,17 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealms>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealms>
     pub async fn get(
         &self,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RealmRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms", self.url))
+            .get(format!(
+                "{}/admin/realms",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -41,11 +44,17 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealms>
-    pub async fn post(&self, body: RealmRepresentation) -> Result<DefaultResponse, KeycloakError> {
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealms>
+    pub async fn post(
+        &self,
+        body: RealmRepresentation,
+    ) -> Result<DefaultResponse, KeycloakError> {
         let builder = self
             .client
-            .post(format!("{}/admin/realms", self.url))
+            .post(format!(
+                "{}/admin/realms",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -62,12 +71,18 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealm>
-    pub async fn realm_get(&self, realm: &str) -> Result<RealmRepresentation, KeycloakError> {
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealm>
+    pub async fn realm_get(
+        &self,
+        realm: &str,
+    ) -> Result<RealmRepresentation, KeycloakError> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -86,7 +101,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealm>
     pub async fn realm_put(
         &self,
         realm: &str,
@@ -95,7 +110,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(format!("{}/admin/realms/{realm}", self.url))
+            .put(format!(
+                "{}/admin/realms/{realm}",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -114,12 +132,18 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealm>
-    pub async fn realm_delete(&self, realm: &str) -> Result<DefaultResponse, KeycloakError> {
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealm>
+    pub async fn realm_delete(
+        &self,
+        realm: &str,
+    ) -> Result<DefaultResponse, KeycloakError> {
         let realm = p(realm);
         let builder = self
             .client
-            .delete(format!("{}/admin/realms/{realm}", self.url))
+            .delete(format!(
+                "{}/admin/realms/{realm}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
@@ -147,7 +171,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/admin-events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmadmin_events>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmadmin_events>
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_admin_events_get(
         &self,
@@ -168,7 +192,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/admin-events", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/admin-events",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = auth_client {
             builder = builder.query(&[("authClient", v)]);
@@ -198,21 +225,13 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = operation_types {
-            builder = builder.query(
-                &v.into_iter()
-                    .map(|e| ("operationTypes", e))
-                    .collect::<Vec<_>>(),
-            );
+            builder = builder.query(&v.into_iter().map(|e| ("operationTypes", e)).collect::<Vec<_>>());
         }
         if let Some(v) = resource_path {
             builder = builder.query(&[("resourcePath", v)]);
         }
         if let Some(v) = resource_types {
-            builder = builder.query(
-                &v.into_iter()
-                    .map(|e| ("resourceTypes", e))
-                    .collect::<Vec<_>>(),
-            );
+            builder = builder.query(&v.into_iter().map(|e| ("resourceTypes", e)).collect::<Vec<_>>());
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -230,7 +249,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/admin-events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
     pub async fn realm_admin_events_delete(
         &self,
         realm: &str,
@@ -238,7 +257,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .delete(format!("{}/admin/realms/{realm}/admin-events", self.url))
+            .delete(format!(
+                "{}/admin/realms/{realm}/admin-events",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
@@ -255,7 +277,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/client-description-converter`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclient_description_converter>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclient_description_converter>
     pub async fn realm_client_description_converter_post(
         &self,
         realm: &str,
@@ -283,7 +305,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-policies/policies`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_policiespolicies>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_policiespolicies>
     pub async fn realm_client_policies_policies_get(
         &self,
         realm: &str,
@@ -315,7 +337,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-policies/policies`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_policiespolicies>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_policiespolicies>
     pub async fn realm_client_policies_policies_put(
         &self,
         realm: &str,
@@ -343,7 +365,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-policies/profiles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_policiesprofiles>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_policiesprofiles>
     pub async fn realm_client_policies_profiles_get(
         &self,
         realm: &str,
@@ -375,7 +397,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-policies/profiles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_policiesprofiles>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_policiesprofiles>
     pub async fn realm_client_policies_profiles_put(
         &self,
         realm: &str,
@@ -404,7 +426,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-session-stats`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_session_stats>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_session_stats>
     pub async fn realm_client_session_stats_get(
         &self,
         realm: &str,
@@ -431,7 +453,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_types>
     pub async fn realm_client_types_get(
         &self,
         realm: &str,
@@ -439,7 +461,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/client-types", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/client-types",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -458,7 +483,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_types>
     pub async fn realm_client_types_put(
         &self,
         realm: &str,
@@ -467,7 +492,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(format!("{}/admin/realms/{realm}/client-types", self.url))
+            .put(format!(
+                "{}/admin/realms/{realm}/client-types",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -482,7 +510,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/credential-registrators`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcredential_registrators>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmcredential_registrators>
     pub async fn realm_credential_registrators_get(
         &self,
         realm: &str,
@@ -509,7 +537,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/default-default-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmdefault_default_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmdefault_default_client_scopes>
     pub async fn realm_default_default_client_scopes_get(
         &self,
         realm: &str,
@@ -537,7 +565,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmdefault_default_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     pub async fn realm_default_default_client_scopes_with_client_scope_id_put(
@@ -570,7 +598,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmdefault_default_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     pub async fn realm_default_default_client_scopes_with_client_scope_id_delete(
@@ -601,7 +629,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/default-groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmdefault_groups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmdefault_groups>
     pub async fn realm_default_groups_get(
         &self,
         realm: &str,
@@ -609,7 +637,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/default-groups", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/default-groups",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -626,7 +657,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmdefault_groupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmdefault_groupsgroupid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-groups/{groupId}`
     pub async fn realm_default_groups_with_group_id_put(
@@ -659,7 +690,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmdefault_groupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmdefault_groupsgroupid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-groups/{groupId}`
     pub async fn realm_default_groups_with_group_id_delete(
@@ -690,7 +721,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/default-optional-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmdefault_optional_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmdefault_optional_client_scopes>
     pub async fn realm_default_optional_client_scopes_get(
         &self,
         realm: &str,
@@ -718,7 +749,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     pub async fn realm_default_optional_client_scopes_with_client_scope_id_put(
@@ -751,7 +782,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     pub async fn realm_default_optional_client_scopes_with_client_scope_id_delete(
@@ -791,7 +822,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmevents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmevents>
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_events_get(
         &self,
@@ -809,7 +840,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/events", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/events",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = client {
             builder = builder.query(&[("client", v)]);
@@ -854,12 +888,18 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmevents>
-    pub async fn realm_events_delete(&self, realm: &str) -> Result<DefaultResponse, KeycloakError> {
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmevents>
+    pub async fn realm_events_delete(
+        &self,
+        realm: &str,
+    ) -> Result<DefaultResponse, KeycloakError> {
         let realm = p(realm);
         let builder = self
             .client
-            .delete(format!("{}/admin/realms/{realm}/events", self.url))
+            .delete(format!(
+                "{}/admin/realms/{realm}/events",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
@@ -875,7 +915,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/events/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmeventsconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmeventsconfig>
     pub async fn realm_events_config_get(
         &self,
         realm: &str,
@@ -883,7 +923,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/events/config", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/events/config",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -900,7 +943,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/events/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmeventsconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmeventsconfig>
     pub async fn realm_events_config_put(
         &self,
         realm: &str,
@@ -909,7 +952,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(format!("{}/admin/realms/{realm}/events/config", self.url))
+            .put(format!(
+                "{}/admin/realms/{realm}/events/config",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -925,7 +971,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/group-by-path/{path}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroup_by_pathpath>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroup_by_pathpath>
     pub async fn realm_group_by_path_with_path_get(
         &self,
         realm: &str,
@@ -952,7 +998,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/localization`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmlocalization>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmlocalization>
     pub async fn realm_localization_get(
         &self,
         realm: &str,
@@ -960,7 +1006,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/localization", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/localization",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -976,7 +1025,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmlocalizationlocale>
     pub async fn realm_localization_with_locale_get(
         &self,
         realm: &str,
@@ -1013,7 +1062,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmlocalizationlocale>
     pub async fn realm_localization_with_locale_post(
         &self,
         realm: &str,
@@ -1045,7 +1094,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocale>
     pub async fn realm_localization_with_locale_delete(
         &self,
         realm: &str,
@@ -1074,7 +1123,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmlocalizationlocalekey>
     pub async fn realm_localization_with_locale_with_key_get(
         &self,
         realm: &str,
@@ -1108,7 +1157,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmlocalizationlocalekey>
     pub async fn realm_localization_with_locale_with_key_put(
         &self,
         realm: &str,
@@ -1143,7 +1192,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocalekey>
     pub async fn realm_localization_with_locale_with_key_delete(
         &self,
         realm: &str,
@@ -1174,7 +1223,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/logout-all`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmlogout_all>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmlogout_all>
     pub async fn realm_logout_all_post(
         &self,
         realm: &str,
@@ -1182,7 +1231,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/logout-all", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/logout-all",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1200,7 +1252,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/partial-export`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmpartial_export>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmpartial_export>
     pub async fn realm_partial_export_post(
         &self,
         realm: &str,
@@ -1210,7 +1262,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/partial-export", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/partial-export",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = export_clients {
             builder = builder.query(&[("exportClients", v)]);
@@ -1233,7 +1288,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/partialImport`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmpartialimport>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmpartialimport>
     pub async fn realm_partial_import_post(
         &self,
         realm: &str,
@@ -1242,7 +1297,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/partialImport", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/partialImport",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -1259,7 +1317,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/push-revocation`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmpush_revocation>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmpush_revocation>
     pub async fn realm_push_revocation_post(
         &self,
         realm: &str,
@@ -1267,7 +1325,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(format!("{}/admin/realms/{realm}/push-revocation", self.url))
+            .post(format!(
+                "{}/admin/realms/{realm}/push-revocation",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1287,7 +1348,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/sessions/{session}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmsessionssession>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmsessionssession>
     pub async fn realm_sessions_with_session_delete(
         &self,
         realm: &str,
@@ -1323,7 +1384,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/testSMTPConnection`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmtestsmtpconnection>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmtestsmtpconnection>
     #[deprecated]
     pub async fn realm_test_smtp_connection_post(
         &self,
@@ -1351,7 +1412,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users-management-permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmusers_management_permissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmusers_management_permissions>
     pub async fn realm_users_management_permissions_get(
         &self,
         realm: &str,
@@ -1377,7 +1438,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users-management-permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmusers_management_permissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmusers_management_permissions>
     pub async fn realm_users_management_permissions_put(
         &self,
         realm: &str,
@@ -1395,6 +1456,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
+
 }
 // not all paths processed
-// left 228
+// left 237

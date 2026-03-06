@@ -12,12 +12,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_scopes>
     pub fn client_scopes_get(
         &'a self,
-    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
-    {
-        self.admin.realm_client_scopes_get(self.realm)
+    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_client_scopes_get(
+                self.realm,
+            )
     }
 
     /// Create a new client scope Client Scope’s name must be unique!
@@ -33,12 +35,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclient_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclient_scopes>
     pub fn client_scopes_post(
         &'a self,
         body: ClientScopeRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_client_scopes_post(self.realm, body)
+        self.admin
+            .realm_client_scopes_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Get representation of the client scope
@@ -52,7 +58,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}`
     pub fn client_scopes_with_client_scope_id_get(
@@ -60,7 +66,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_scope_id: &'a str,
     ) -> impl Future<Output = Result<ClientScopeRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_scopes_with_client_scope_id_get(self.realm, client_scope_id)
+            .realm_client_scopes_with_client_scope_id_get(
+                self.realm,
+                client_scope_id,
+            )
     }
 
     /// Update the client scope
@@ -77,7 +86,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_scopesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_scopesclient_scope_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/client-scopes/{client-scope-id}`
     pub fn client_scopes_with_client_scope_id_put(
@@ -86,7 +95,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: ClientScopeRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_scopes_with_client_scope_id_put(self.realm, client_scope_id, body)
+            .realm_client_scopes_with_client_scope_id_put(
+                self.realm,
+                client_scope_id,
+                body,
+            )
     }
 
     /// Delete the client scope
@@ -102,7 +115,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}`
     pub fn client_scopes_with_client_scope_id_delete(
@@ -110,7 +123,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_scope_id: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_scopes_with_client_scope_id_delete(self.realm, client_scope_id)
+            .realm_client_scopes_with_client_scope_id_delete(
+                self.realm,
+                client_scope_id,
+            )
     }
 
     /// Get client scopes belonging to the realm Returns a list of client scopes belonging to the realm
@@ -123,12 +139,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-templates`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_templates>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_templates>
     pub fn client_templates_get(
         &'a self,
-    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
-    {
-        self.admin.realm_client_templates_get(self.realm)
+    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_client_templates_get(
+                self.realm,
+            )
     }
 
     /// Create a new client scope Client Scope’s name must be unique!
@@ -144,12 +162,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/client-templates`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclient_templates>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclient_templates>
     pub fn client_templates_post(
         &'a self,
         body: ClientScopeRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_client_templates_post(self.realm, body)
+        self.admin
+            .realm_client_templates_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Get representation of the client scope
@@ -163,7 +185,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}`
     pub fn client_templates_with_client_scope_id_get(
@@ -171,7 +193,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_scope_id: &'a str,
     ) -> impl Future<Output = Result<ClientScopeRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_templates_with_client_scope_id_get(self.realm, client_scope_id)
+            .realm_client_templates_with_client_scope_id_get(
+                self.realm,
+                client_scope_id,
+            )
     }
 
     /// Update the client scope
@@ -188,7 +213,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_templatesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_templatesclient_scope_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/client-templates/{client-scope-id}`
     pub fn client_templates_with_client_scope_id_put(
@@ -196,11 +221,12 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_scope_id: &'a str,
         body: ClientScopeRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_client_templates_with_client_scope_id_put(
-            self.realm,
-            client_scope_id,
-            body,
-        )
+        self.admin
+            .realm_client_templates_with_client_scope_id_put(
+                self.realm,
+                client_scope_id,
+                body,
+            )
     }
 
     /// Delete the client scope
@@ -216,7 +242,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}`
     pub fn client_templates_with_client_scope_id_delete(
@@ -224,6 +250,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_scope_id: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_templates_with_client_scope_id_delete(self.realm, client_scope_id)
+            .realm_client_templates_with_client_scope_id_delete(
+                self.realm,
+                client_scope_id,
+            )
     }
+
 }

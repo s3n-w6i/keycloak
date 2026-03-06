@@ -12,11 +12,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealm>
     pub fn get(
         &'a self,
     ) -> impl Future<Output = Result<RealmRepresentation, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_get(self.realm)
+        self.admin
+            .realm_get(
+                self.realm,
+            )
     }
 
     /// Update the top-level information of the realm Any user, roles or client information in the representation will be ignored.
@@ -32,12 +35,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealm>
     pub fn put(
         &'a self,
         body: RealmRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_put(self.realm, body)
+        self.admin
+            .realm_put(
+                self.realm,
+                body,
+            )
     }
 
     /// Delete the realm
@@ -52,11 +59,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealm>
     pub fn delete(
         &'a self,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_delete(self.realm)
+        self.admin
+            .realm_delete(
+                self.realm,
+            )
     }
 
     /// Get admin events Returns all admin events, or filters events based on URL query parameters listed here
@@ -81,9 +91,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/admin-events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmadmin_events>
-    pub fn admin_events_get(&'a self) -> RealmAdminEventsGet<'a, TS> {
-        RealmAdminEventsGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmadmin_events>
+    pub fn admin_events_get(
+        &'a self,
+    ) -> RealmAdminEventsGet<'a, TS> {
+        RealmAdminEventsGet {
+            realm_admin: self,
+        }
     }
 
     /// Delete all admin events
@@ -98,11 +112,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/admin-events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
     pub fn admin_events_delete(
         &'a self,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_admin_events_delete(self.realm)
+        self.admin
+            .realm_admin_events_delete(
+                self.realm,
+            )
     }
 
     /// Base path for importing clients under this realm.
@@ -116,13 +133,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/client-description-converter`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclient_description_converter>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclient_description_converter>
     pub fn client_description_converter_post(
         &'a self,
         body: String,
     ) -> impl Future<Output = Result<ClientRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_description_converter_post(self.realm, body)
+            .realm_client_description_converter_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Parameters:
@@ -134,9 +154,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-policies/policies`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_policiespolicies>
-    pub fn client_policies_policies_get(&'a self) -> RealmClientPoliciesPoliciesGet<'a, TS> {
-        RealmClientPoliciesPoliciesGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_policiespolicies>
+    pub fn client_policies_policies_get(
+        &'a self,
+    ) -> RealmClientPoliciesPoliciesGet<'a, TS> {
+        RealmClientPoliciesPoliciesGet {
+            realm_admin: self,
+        }
     }
 
     /// Parameters:
@@ -150,13 +174,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-policies/policies`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_policiespolicies>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_policiespolicies>
     pub fn client_policies_policies_put(
         &'a self,
         body: ClientPoliciesRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_policies_policies_put(self.realm, body)
+            .realm_client_policies_policies_put(
+                self.realm,
+                body,
+            )
     }
 
     /// Parameters:
@@ -168,9 +195,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-policies/profiles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_policiesprofiles>
-    pub fn client_policies_profiles_get(&'a self) -> RealmClientPoliciesProfilesGet<'a, TS> {
-        RealmClientPoliciesProfilesGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_policiesprofiles>
+    pub fn client_policies_profiles_get(
+        &'a self,
+    ) -> RealmClientPoliciesProfilesGet<'a, TS> {
+        RealmClientPoliciesProfilesGet {
+            realm_admin: self,
+        }
     }
 
     /// Parameters:
@@ -184,13 +215,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-policies/profiles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_policiesprofiles>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_policiesprofiles>
     pub fn client_policies_profiles_put(
         &'a self,
         body: ClientProfilesRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_policies_profiles_put(self.realm, body)
+            .realm_client_policies_profiles_put(
+                self.realm,
+                body,
+            )
     }
 
     /// Get client session stats Returns a JSON map.
@@ -203,12 +237,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-session-stats`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_session_stats>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_session_stats>
     pub fn client_session_stats_get(
         &'a self,
-    ) -> impl Future<Output = Result<TypeVec<TypeMap<String, String>>, KeycloakError>> + use<'a, TS>
-    {
-        self.admin.realm_client_session_stats_get(self.realm)
+    ) -> impl Future<Output = Result<TypeVec<TypeMap<String, String>>, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_client_session_stats_get(
+                self.realm,
+            )
     }
 
     /// List all client types available in the current realm
@@ -221,11 +257,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_types>
     pub fn client_types_get(
         &'a self,
     ) -> impl Future<Output = Result<ClientTypesRepresentation, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_client_types_get(self.realm)
+        self.admin
+            .realm_client_types_get(
+                self.realm,
+            )
     }
 
     /// Update a client type
@@ -241,12 +280,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclient_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclient_types>
     pub fn client_types_put(
         &'a self,
         body: ClientTypesRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_client_types_put(self.realm, body)
+        self.admin
+            .realm_client_types_put(
+                self.realm,
+                body,
+            )
     }
 
     /// Parameters:
@@ -257,11 +300,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/credential-registrators`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcredential_registrators>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmcredential_registrators>
     pub fn credential_registrators_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<String>, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_credential_registrators_get(self.realm)
+        self.admin
+            .realm_credential_registrators_get(
+                self.realm,
+            )
     }
 
     /// Get realm default client scopes. Only name and ids are returned.
@@ -274,13 +320,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/default-default-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmdefault_default_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmdefault_default_client_scopes>
     pub fn default_default_client_scopes_get(
         &'a self,
-    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_default_default_client_scopes_get(self.realm)
+            .realm_default_default_client_scopes_get(
+                self.realm,
+            )
     }
 
     /// Parameters:
@@ -294,7 +341,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmdefault_default_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     pub fn default_default_client_scopes_with_client_scope_id_put(
@@ -319,7 +366,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmdefault_default_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     pub fn default_default_client_scopes_with_client_scope_id_delete(
@@ -343,12 +390,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/default-groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmdefault_groups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmdefault_groups>
     pub fn default_groups_get(
         &'a self,
-    ) -> impl Future<Output = Result<TypeVec<GroupRepresentation>, KeycloakError>> + use<'a, TS>
-    {
-        self.admin.realm_default_groups_get(self.realm)
+    ) -> impl Future<Output = Result<TypeVec<GroupRepresentation>, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_default_groups_get(
+                self.realm,
+            )
     }
 
     /// Parameters:
@@ -362,7 +411,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmdefault_groupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmdefault_groupsgroupid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-groups/{groupId}`
     pub fn default_groups_with_group_id_put(
@@ -370,7 +419,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         group_id: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_default_groups_with_group_id_put(self.realm, group_id)
+            .realm_default_groups_with_group_id_put(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Parameters:
@@ -384,7 +436,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmdefault_groupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmdefault_groupsgroupid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-groups/{groupId}`
     pub fn default_groups_with_group_id_delete(
@@ -392,7 +444,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         group_id: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_default_groups_with_group_id_delete(self.realm, group_id)
+            .realm_default_groups_with_group_id_delete(
+                self.realm,
+                group_id,
+            )
     }
 
     /// Get realm optional client scopes. Only name and ids are returned.
@@ -405,13 +460,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/default-optional-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmdefault_optional_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmdefault_optional_client_scopes>
     pub fn default_optional_client_scopes_get(
         &'a self,
-    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_default_optional_client_scopes_get(self.realm)
+            .realm_default_optional_client_scopes_get(
+                self.realm,
+            )
     }
 
     /// Parameters:
@@ -425,7 +481,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     pub fn default_optional_client_scopes_with_client_scope_id_put(
@@ -450,7 +506,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     pub fn default_optional_client_scopes_with_client_scope_id_delete(
@@ -483,9 +539,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmevents>
-    pub fn events_get(&'a self) -> RealmEventsGet<'a, TS> {
-        RealmEventsGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmevents>
+    pub fn events_get(
+        &'a self,
+    ) -> RealmEventsGet<'a, TS> {
+        RealmEventsGet {
+            realm_admin: self,
+        }
     }
 
     /// Delete all events
@@ -500,11 +560,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmevents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmevents>
     pub fn events_delete(
         &'a self,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_events_delete(self.realm)
+        self.admin
+            .realm_events_delete(
+                self.realm,
+            )
     }
 
     /// Get the events provider configuration Returns JSON object with events provider configuration
@@ -517,12 +580,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/events/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmeventsconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmeventsconfig>
     pub fn events_config_get(
         &'a self,
-    ) -> impl Future<Output = Result<RealmEventsConfigRepresentation, KeycloakError>> + use<'a, TS>
-    {
-        self.admin.realm_events_config_get(self.realm)
+    ) -> impl Future<Output = Result<RealmEventsConfigRepresentation, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_events_config_get(
+                self.realm,
+            )
     }
 
     /// Parameters:
@@ -536,12 +601,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/events/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmeventsconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmeventsconfig>
     pub fn events_config_put(
         &'a self,
         body: RealmEventsConfigRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_events_config_put(self.realm, body)
+        self.admin
+            .realm_events_config_put(
+                self.realm,
+                body,
+            )
     }
 
     /// Parameters:
@@ -553,13 +622,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/group-by-path/{path}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroup_by_pathpath>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmgroup_by_pathpath>
     pub fn group_by_path_with_path_get(
         &'a self,
         path: &'a str,
     ) -> impl Future<Output = Result<GroupRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_group_by_path_with_path_get(self.realm, path)
+            .realm_group_by_path_with_path_get(
+                self.realm,
+                path,
+            )
     }
 
     /// Parameters:
@@ -570,11 +642,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/localization`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmlocalization>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmlocalization>
     pub fn localization_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<String>, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_localization_get(self.realm)
+        self.admin
+            .realm_localization_get(
+                self.realm,
+            )
     }
 
     /// Parameters:
@@ -587,7 +662,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmlocalizationlocale>
     pub fn localization_with_locale_get(
         &'a self,
         locale: &'a str,
@@ -612,14 +687,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmlocalizationlocale>
     pub fn localization_with_locale_post(
         &'a self,
         locale: &'a str,
         body: TypeMap<String, String>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_localization_with_locale_post(self.realm, locale, body)
+            .realm_localization_with_locale_post(
+                self.realm,
+                locale,
+                body,
+            )
     }
 
     /// Parameters:
@@ -633,13 +712,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocale>
     pub fn localization_with_locale_delete(
         &'a self,
         locale: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_localization_with_locale_delete(self.realm, locale)
+            .realm_localization_with_locale_delete(
+                self.realm,
+                locale,
+            )
     }
 
     /// Parameters:
@@ -652,14 +734,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmlocalizationlocalekey>
     pub fn localization_with_locale_with_key_get(
         &'a self,
         key: &'a str,
         locale: &'a str,
     ) -> impl Future<Output = Result<TypeString, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_localization_with_locale_with_key_get(self.realm, key, locale)
+            .realm_localization_with_locale_with_key_get(
+                self.realm,
+                key,
+                locale,
+            )
     }
 
     /// Parameters:
@@ -675,7 +761,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmlocalizationlocalekey>
     pub fn localization_with_locale_with_key_put(
         &'a self,
         key: &'a str,
@@ -683,7 +769,12 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: String,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_localization_with_locale_with_key_put(self.realm, key, locale, body)
+            .realm_localization_with_locale_with_key_put(
+                self.realm,
+                key,
+                locale,
+                body,
+            )
     }
 
     /// Parameters:
@@ -698,14 +789,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocalekey>
     pub fn localization_with_locale_with_key_delete(
         &'a self,
         key: &'a str,
         locale: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_localization_with_locale_with_key_delete(self.realm, key, locale)
+            .realm_localization_with_locale_with_key_delete(
+                self.realm,
+                key,
+                locale,
+            )
     }
 
     /// Removes all user sessions.
@@ -718,11 +813,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/logout-all`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmlogout_all>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmlogout_all>
     pub fn logout_all_post(
         &'a self,
     ) -> impl Future<Output = Result<GlobalRequestResult, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_logout_all_post(self.realm)
+        self.admin
+            .realm_logout_all_post(
+                self.realm,
+            )
     }
 
     /// Partial export of existing realm into a JSON file.
@@ -737,9 +835,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/partial-export`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmpartial_export>
-    pub fn partial_export_post(&'a self) -> RealmPartialExportPost<'a, TS> {
-        RealmPartialExportPost { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmpartial_export>
+    pub fn partial_export_post(
+        &'a self,
+    ) -> RealmPartialExportPost<'a, TS> {
+        RealmPartialExportPost {
+            realm_admin: self,
+        }
     }
 
     /// Partial import from a JSON file to an existing realm.
@@ -753,12 +855,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/partialImport`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmpartialimport>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmpartialimport>
     pub fn partial_import_post(
         &'a self,
         body: RealmRepresentation,
     ) -> impl Future<Output = Result<Value, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_partial_import_post(self.realm, body)
+        self.admin
+            .realm_partial_import_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Push the realm's revocation policy to any client that has an admin url associated with it.
@@ -771,11 +877,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/push-revocation`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmpush_revocation>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmpush_revocation>
     pub fn push_revocation_post(
         &'a self,
     ) -> impl Future<Output = Result<GlobalRequestResult, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_push_revocation_post(self.realm)
+        self.admin
+            .realm_push_revocation_post(
+                self.realm,
+            )
     }
 
     /// Remove a specific user session.
@@ -792,7 +901,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/sessions/{session}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmsessionssession>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmsessionssession>
     pub fn sessions_with_session_delete(
         &'a self,
         session: &'a str,
@@ -816,13 +925,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/testSMTPConnection`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmtestsmtpconnection>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmtestsmtpconnection>
     #[deprecated]
     pub fn test_smtp_connection_post(
         &'a self,
         body: TypeMap<String, String>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_test_smtp_connection_post(self.realm, body)
+        self.admin
+            .realm_test_smtp_connection_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Parameters:
@@ -833,13 +946,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users-management-permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmusers_management_permissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmusers_management_permissions>
     pub fn users_management_permissions_get(
         &'a self,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_users_management_permissions_get(self.realm)
+            .realm_users_management_permissions_get(
+                self.realm,
+            )
     }
 
     /// Parameters:
@@ -851,15 +965,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/users-management-permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmusers_management_permissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmusers_management_permissions>
     pub fn users_management_permissions_put(
         &'a self,
         body: ManagementPermissionReference,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_users_management_permissions_put(self.realm, body)
+            .realm_users_management_permissions_put(
+                self.realm,
+                body,
+            )
     }
+
 }
 
 // <h4>Realms Admin</h4>
@@ -912,21 +1029,23 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             resource_types,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_admin_events_get(
-            self.realm_admin.realm,
-            auth_client,
-            auth_ip_address,
-            auth_realm,
-            auth_user,
-            date_from,
-            date_to,
-            direction,
-            first,
-            max,
-            operation_types,
-            resource_path,
-            resource_types,
-        )
+        self.realm_admin
+            .admin
+            .realm_admin_events_get(
+                self.realm_admin.realm,
+                auth_client,
+                auth_ip_address,
+                auth_realm,
+                auth_user,
+                date_from,
+                date_to,
+                direction,
+                first,
+                max,
+                operation_types,
+                resource_path,
+                resource_types,
+            )
     }
 }
 
@@ -965,7 +1084,10 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
-            .realm_client_policies_policies_get(self.realm_admin.realm, include_global_policies)
+            .realm_client_policies_policies_get(
+                self.realm_admin.realm,
+                include_global_policies,
+            )
     }
 }
 
@@ -1004,7 +1126,10 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
-            .realm_client_policies_profiles_get(self.realm_admin.realm, include_global_profiles)
+            .realm_client_policies_profiles_get(
+                self.realm_admin.realm,
+                include_global_profiles,
+            )
     }
 }
 
@@ -1066,18 +1191,20 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             user,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_events_get(
-            self.realm_admin.realm,
-            client,
-            date_from,
-            date_to,
-            direction,
-            first,
-            ip_address,
-            max,
-            type_,
-            user,
-        )
+        self.realm_admin
+            .admin
+            .realm_events_get(
+                self.realm_admin.realm,
+                client,
+                date_from,
+                date_to,
+                direction,
+                first,
+                ip_address,
+                max,
+                type_,
+                user,
+            )
     }
 }
 
@@ -1115,11 +1242,13 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             use_realm_default_locale_fallback,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_localization_with_locale_get(
-            self.realm_admin.realm,
-            self.locale,
-            use_realm_default_locale_fallback,
-        )
+        self.realm_admin
+            .admin
+            .realm_localization_with_locale_get(
+                self.realm_admin.realm,
+                self.locale,
+                use_realm_default_locale_fallback,
+            )
     }
 }
 
@@ -1158,11 +1287,13 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             export_groups_and_roles,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_partial_export_post(
-            self.realm_admin.realm,
-            export_clients,
-            export_groups_and_roles,
-        )
+        self.realm_admin
+            .admin
+            .realm_partial_export_post(
+                self.realm_admin.realm,
+                export_clients,
+                export_groups_and_roles,
+            )
     }
 }
 
@@ -1196,13 +1327,17 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { is_offline }: Self::Args,
-    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_sessions_with_session_delete(
-            self.realm_admin.realm,
-            self.session,
+        Self::Args {
             is_offline,
-        )
+        }: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
+        self.realm_admin
+            .admin
+            .realm_sessions_with_session_delete(
+                self.realm_admin.realm,
+                self.session,
+                is_offline,
+            )
     }
 }
 
@@ -1219,312 +1354,311 @@ where
 
 #[cfg(feature = "builder")]
 mod builder {
-    use crate::builder::Builder;
+use crate::builder::Builder;
 
-    use super::*;
+use super::*;
 
-    // <h4>Realms Admin</h4>
-    impl<'a, TS> RealmAdminEventsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn auth_client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().auth_client(value)
-        }
-        pub fn auth_ip_address(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().auth_ip_address(value)
-        }
-        pub fn auth_realm(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().auth_realm(value)
-        }
-        /// user id
-        pub fn auth_user(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().auth_user(value)
-        }
-        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_from(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().date_from(value)
-        }
-        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_to(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().date_to(value)
-        }
-        /// The direction to sort events by (asc or desc)
-        pub fn direction(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().direction(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn operation_types(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
-            self.builder().operation_types(value)
-        }
-        pub fn resource_path(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().resource_path(value)
-        }
-        pub fn resource_types(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
-            self.builder().resource_types(value)
-        }
+
+// <h4>Realms Admin</h4>
+impl <'a, TS> RealmAdminEventsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn auth_client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().auth_client(value)
     }
-
-    impl<TS> Builder<'_, RealmAdminEventsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn auth_client(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.auth_client = value.into();
-            self
-        }
-        pub fn auth_ip_address(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.auth_ip_address = value.into();
-            self
-        }
-        pub fn auth_realm(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.auth_realm = value.into();
-            self
-        }
-        /// user id
-        pub fn auth_user(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.auth_user = value.into();
-            self
-        }
-        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_from(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.date_from = value.into();
-            self
-        }
-        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_to(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.date_to = value.into();
-            self
-        }
-        /// The direction to sort events by (asc or desc)
-        pub fn direction(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.direction = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn operation_types(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
-            self.args.operation_types = value.into();
-            self
-        }
-        pub fn resource_path(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.resource_path = value.into();
-            self
-        }
-        pub fn resource_types(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
-            self.args.resource_types = value.into();
-            self
-        }
+    pub fn auth_ip_address(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().auth_ip_address(value)
     }
-
-    impl<'a, TS> RealmClientPoliciesPoliciesGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn include_global_policies(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().include_global_policies(value)
-        }
+    pub fn auth_realm(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().auth_realm(value)
     }
-
-    impl<TS> Builder<'_, RealmClientPoliciesPoliciesGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn include_global_policies(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.include_global_policies = value.into();
-            self
-        }
+    /// user id
+    pub fn auth_user(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().auth_user(value)
     }
-
-    impl<'a, TS> RealmClientPoliciesProfilesGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn include_global_profiles(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().include_global_profiles(value)
-        }
+    /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_from(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().date_from(value)
     }
-
-    impl<TS> Builder<'_, RealmClientPoliciesProfilesGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn include_global_profiles(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.include_global_profiles = value.into();
-            self
-        }
+    /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_to(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().date_to(value)
     }
-
-    impl<'a, TS> RealmEventsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// App or oauth client name
-        pub fn client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().client(value)
-        }
-        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_from(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().date_from(value)
-        }
-        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_to(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().date_to(value)
-        }
-        /// The direction to sort events by (asc or desc)
-        pub fn direction(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().direction(value)
-        }
-        /// Paging offset
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// IP Address
-        pub fn ip_address(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().ip_address(value)
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        /// The types of events to return
-        pub fn type_(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        /// User id
-        pub fn user(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().user(value)
-        }
+    /// The direction to sort events by (asc or desc)
+    pub fn direction(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().direction(value)
     }
-
-    impl<TS> Builder<'_, RealmEventsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// App or oauth client name
-        pub fn client(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.client = value.into();
-            self
-        }
-        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_from(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.date_from = value.into();
-            self
-        }
-        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
-        pub fn date_to(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.date_to = value.into();
-            self
-        }
-        /// The direction to sort events by (asc or desc)
-        pub fn direction(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.direction = value.into();
-            self
-        }
-        /// Paging offset
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// IP Address
-        pub fn ip_address(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.ip_address = value.into();
-            self
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        /// The types of events to return
-        pub fn type_(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        /// User id
-        pub fn user(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.user = value.into();
-            self
-        }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
     }
-
-    impl<'a, TS> RealmLocalizationWithLocaleGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn use_realm_default_locale_fallback(
-            self,
-            value: impl Into<Option<bool>>,
-        ) -> Builder<'a, Self> {
-            self.builder().use_realm_default_locale_fallback(value)
-        }
+    /// Maximum results size (defaults to 100)
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
     }
-
-    impl<TS> Builder<'_, RealmLocalizationWithLocaleGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn use_realm_default_locale_fallback(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.use_realm_default_locale_fallback = value.into();
-            self
-        }
+    pub fn operation_types(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
+        self.builder().operation_types(value)
     }
-
-    impl<'a, TS> RealmPartialExportPost<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn export_clients(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().export_clients(value)
-        }
-        pub fn export_groups_and_roles(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().export_groups_and_roles(value)
-        }
+    pub fn resource_path(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().resource_path(value)
     }
-
-    impl<TS> Builder<'_, RealmPartialExportPost<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn export_clients(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.export_clients = value.into();
-            self
-        }
-        pub fn export_groups_and_roles(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.export_groups_and_roles = value.into();
-            self
-        }
+    pub fn resource_types(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
+        self.builder().resource_types(value)
     }
+}
 
-    impl<'a, TS> RealmSessionsWithSessionDelete<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn is_offline(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().is_offline(value)
-        }
+impl<TS> Builder<'_, RealmAdminEventsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn auth_client(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.auth_client = value.into();
+        self
     }
+    pub fn auth_ip_address(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.auth_ip_address = value.into();
+        self
+    }
+    pub fn auth_realm(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.auth_realm = value.into();
+        self
+    }
+    /// user id
+    pub fn auth_user(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.auth_user = value.into();
+        self
+    }
+    /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_from(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.date_from = value.into();
+        self
+    }
+    /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_to(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.date_to = value.into();
+        self
+    }
+    /// The direction to sort events by (asc or desc)
+    pub fn direction(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.direction = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn operation_types(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
+        self.args.operation_types = value.into();
+        self
+    }
+    pub fn resource_path(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.resource_path = value.into();
+        self
+    }
+    pub fn resource_types(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
+        self.args.resource_types = value.into();
+        self
+    }
+}
 
-    impl<TS> Builder<'_, RealmSessionsWithSessionDelete<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn is_offline(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.is_offline = value.into();
-            self
-        }
+impl <'a, TS> RealmClientPoliciesPoliciesGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn include_global_policies(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().include_global_policies(value)
     }
+}
+
+impl<TS> Builder<'_, RealmClientPoliciesPoliciesGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn include_global_policies(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.include_global_policies = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientPoliciesProfilesGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn include_global_profiles(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().include_global_profiles(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientPoliciesProfilesGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn include_global_profiles(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.include_global_profiles = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmEventsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// App or oauth client name
+    pub fn client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().client(value)
+    }
+    /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_from(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().date_from(value)
+    }
+    /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_to(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().date_to(value)
+    }
+    /// The direction to sort events by (asc or desc)
+    pub fn direction(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().direction(value)
+    }
+    /// Paging offset
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// IP Address
+    pub fn ip_address(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().ip_address(value)
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    /// The types of events to return
+    pub fn type_(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    /// User id
+    pub fn user(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().user(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmEventsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// App or oauth client name
+    pub fn client(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.client = value.into();
+        self
+    }
+    /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_from(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.date_from = value.into();
+        self
+    }
+    /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    pub fn date_to(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.date_to = value.into();
+        self
+    }
+    /// The direction to sort events by (asc or desc)
+    pub fn direction(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.direction = value.into();
+        self
+    }
+    /// Paging offset
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// IP Address
+    pub fn ip_address(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.ip_address = value.into();
+        self
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    /// The types of events to return
+    pub fn type_(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    /// User id
+    pub fn user(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.user = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmLocalizationWithLocaleGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn use_realm_default_locale_fallback(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().use_realm_default_locale_fallback(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmLocalizationWithLocaleGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn use_realm_default_locale_fallback(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.use_realm_default_locale_fallback = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmPartialExportPost<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn export_clients(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().export_clients(value)
+    }
+    pub fn export_groups_and_roles(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().export_groups_and_roles(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmPartialExportPost<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn export_clients(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.export_clients = value.into();
+        self
+    }
+    pub fn export_groups_and_roles(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.export_groups_and_roles = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmSessionsWithSessionDelete<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn is_offline(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().is_offline(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmSessionsWithSessionDelete<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn is_offline(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.is_offline = value.into();
+        self
+    }
+}
+
 }

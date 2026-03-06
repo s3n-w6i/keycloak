@@ -12,12 +12,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/client-registration-policy/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
     pub fn client_registration_policy_providers_get(
         &'a self,
-    ) -> impl Future<Output = Result<TypeVec<ComponentTypeRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<ComponentTypeRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_client_registration_policy_providers_get(self.realm)
+            .realm_client_registration_policy_providers_get(
+                self.realm,
+            )
     }
+
 }

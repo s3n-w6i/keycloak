@@ -18,9 +18,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclients>
-    pub fn clients_get(&'a self) -> RealmClientsGet<'a, TS> {
-        RealmClientsGet { realm_admin: self }
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclients>
+    pub fn clients_get(
+        &'a self,
+    ) -> RealmClientsGet<'a, TS> {
+        RealmClientsGet {
+            realm_admin: self,
+        }
     }
 
     /// Create a new client Client’s client_id must be unique!
@@ -36,12 +40,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclients>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclients>
     pub fn clients_post(
         &'a self,
         body: ClientRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
-        self.admin.realm_clients_post(self.realm, body)
+        self.admin
+            .realm_clients_post(
+                self.realm,
+                body,
+            )
     }
 
     /// Get representation of the client
@@ -55,7 +63,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuid>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}`
     pub fn clients_with_client_uuid_get(
@@ -63,7 +71,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<ClientRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Update the client
@@ -80,7 +91,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}`
     pub fn clients_with_client_uuid_put(
@@ -89,7 +100,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: ClientRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_put(self.realm, client_uuid, body)
+            .realm_clients_with_client_uuid_put(
+                self.realm,
+                client_uuid,
+                body,
+            )
     }
 
     /// Delete the client
@@ -105,7 +120,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}`
     pub fn clients_with_client_uuid_delete(
@@ -113,7 +128,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_delete(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_delete(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Get the client secret
@@ -127,7 +145,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/client-secret`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secret>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secret>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/client-secret`
     pub fn clients_with_client_uuid_client_secret_get(
@@ -135,7 +153,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<CredentialRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_client_secret_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_client_secret_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Generate a new secret for the client
@@ -149,7 +170,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/client-secret`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidclient_secret>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidclient_secret>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/client-secret`
     pub fn clients_with_client_uuid_client_secret_post(
@@ -157,7 +178,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<CredentialRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_client_secret_post(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_client_secret_post(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Get the rotated client secret
@@ -171,7 +195,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secretrotated>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secretrotated>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/client-secret/rotated`
     pub fn clients_with_client_uuid_client_secret_rotated_get(
@@ -179,7 +203,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<CredentialRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_client_secret_rotated_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_client_secret_rotated_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Invalidate the rotated secret for the client
@@ -195,7 +222,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidclient_secretrotated>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidclient_secretrotated>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/client-secret/rotated`
     pub fn clients_with_client_uuid_client_secret_rotated_delete(
@@ -203,7 +230,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_client_secret_rotated_delete(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_client_secret_rotated_delete(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Get default client scopes.  Only name and ids are returned.
@@ -217,16 +247,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiddefault_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiddefault_client_scopes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes`
     pub fn clients_with_client_uuid_default_client_scopes_get(
         &'a self,
         client_uuid: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_default_client_scopes_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_default_client_scopes_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Parameters:
@@ -241,7 +273,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_default_client_scopes_with_client_scope_id_put(
@@ -269,7 +301,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_default_client_scopes_with_client_scope_id_delete(
@@ -299,7 +331,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-access-token`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_access_token>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_access_token>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-access-token`
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_access_token_get(
@@ -326,7 +358,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-id-token`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_id_token>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_id_token>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-id-token`
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_id_token_get(
@@ -352,7 +384,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-userinfo`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_userinfo>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_userinfo>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-userinfo`
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_userinfo_get(
@@ -377,7 +409,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/protocol-mappers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesprotocol_mappers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesprotocol_mappers>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/protocol-mappers`
     pub fn clients_with_client_uuid_evaluate_scopes_protocol_mappers_get(
@@ -403,15 +435,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/granted`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridgranted>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridgranted>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/granted`
     pub fn clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_granted_get(
         &'a self,
         client_uuid: &'a str,
         role_container_id: &'a str,
-    ) -> RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
-    {
+    ) -> RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS> {
         RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet {
             realm_admin: self,
             client_uuid,
@@ -432,15 +463,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridnot_granted>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridnot_granted>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted`
     pub fn clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_not_granted_get(
         &'a self,
         client_uuid: &'a str,
         role_container_id: &'a str,
-    ) -> RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<'a, TS>
-    {
+    ) -> RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<'a, TS> {
         RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet {
             realm_admin: self,
             client_uuid,
@@ -460,7 +490,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/installation/providers/{provider_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidinstallationprovidersproviderid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidinstallationprovidersproviderid>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/installation/providers/{providerId}`
     pub fn clients_with_client_uuid_installation_providers_with_provider_id_get(
@@ -487,16 +517,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidmanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/management/permissions`
     pub fn clients_with_client_uuid_management_permissions_get(
         &'a self,
         client_uuid: &'a str,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_management_permissions_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_management_permissions_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -511,15 +543,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidmanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/management/permissions`
     pub fn clients_with_client_uuid_management_permissions_put(
         &'a self,
         client_uuid: &'a str,
         body: ManagementPermissionReference,
-    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_management_permissions_put(
                 self.realm,
@@ -542,7 +573,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/nodes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidnodes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidnodes>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/nodes`
     pub fn clients_with_client_uuid_nodes_post(
@@ -551,7 +582,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: TypeMap<String, String>,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_nodes_post(self.realm, client_uuid, body)
+            .realm_clients_with_client_uuid_nodes_post(
+                self.realm,
+                client_uuid,
+                body,
+            )
     }
 
     /// Unregister a cluster node from the client
@@ -568,7 +603,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/nodes/{node}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidnodesnode>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidnodesnode>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/nodes/{node}`
     pub fn clients_with_client_uuid_nodes_with_node_delete(
@@ -577,7 +612,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         node: &'a str,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_nodes_with_node_delete(self.realm, client_uuid, node)
+            .realm_clients_with_client_uuid_nodes_with_node_delete(
+                self.realm,
+                client_uuid,
+                node,
+            )
     }
 
     /// Get application offline session count Returns a number of offline user sessions associated with this client { "count": number }
@@ -591,7 +630,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/offline-session-count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_session_count>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_session_count>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/offline-session-count`
     pub fn clients_with_client_uuid_offline_session_count_get(
@@ -599,7 +638,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<TypeMap<String, i64>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_offline_session_count_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_offline_session_count_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Get offline sessions for client Returns a list of offline user sessions associated with this client
@@ -615,7 +657,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/offline-sessions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_sessions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_sessions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/offline-sessions`
     pub fn clients_with_client_uuid_offline_sessions_get(
@@ -639,16 +681,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoptional_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoptional_client_scopes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes`
     pub fn clients_with_client_uuid_optional_client_scopes_get(
         &'a self,
         client_uuid: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_optional_client_scopes_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_optional_client_scopes_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Parameters:
@@ -663,7 +707,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_optional_client_scopes_with_client_scope_id_put(
@@ -691,7 +735,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_optional_client_scopes_with_client_scope_id_delete(
@@ -718,7 +762,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/push-revocation`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidpush_revocation>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidpush_revocation>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/push-revocation`
     pub fn clients_with_client_uuid_push_revocation_post(
@@ -726,7 +770,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<GlobalRequestResult, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_push_revocation_post(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_push_revocation_post(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Generate a new registration access token for the client
@@ -740,7 +787,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/registration-access-token`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidregistration_access_token>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidregistration_access_token>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/registration-access-token`
     pub fn clients_with_client_uuid_registration_access_token_post(
@@ -748,7 +795,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<ClientRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_registration_access_token_post(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_registration_access_token_post(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Get a user dedicated to the service account
@@ -762,7 +812,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/service-account-user`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidservice_account_user>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidservice_account_user>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/service-account-user`
     pub fn clients_with_client_uuid_service_account_user_get(
@@ -770,7 +820,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<UserRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_service_account_user_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_service_account_user_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Get application session count Returns a number of user sessions associated with this client { "count": number }
@@ -784,7 +837,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/session-count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidsession_count>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidsession_count>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/session-count`
     pub fn clients_with_client_uuid_session_count_get(
@@ -792,7 +845,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<TypeMap<String, i64>, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_session_count_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_session_count_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Test if registered cluster nodes are available Tests availability by sending 'ping' request to all cluster nodes.
@@ -806,7 +862,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/test-nodes-available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidtest_nodes_available>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidtest_nodes_available>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/test-nodes-available`
     pub fn clients_with_client_uuid_test_nodes_available_get(
@@ -814,7 +870,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         client_uuid: &'a str,
     ) -> impl Future<Output = Result<GlobalRequestResult, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_test_nodes_available_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_test_nodes_available_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Get user sessions for client Returns a list of user sessions associated with this client
@@ -830,7 +889,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/user-sessions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiduser_sessions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiduser_sessions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/user-sessions`
     pub fn clients_with_client_uuid_user_sessions_get(
@@ -842,6 +901,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             client_uuid,
         }
     }
+
 }
 
 // <h4>Clients</h4>
@@ -882,15 +942,17 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
             viewable_only,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin.admin.realm_clients_get(
-            self.realm_admin.realm,
-            client_id,
-            first,
-            max,
-            q,
-            search,
-            viewable_only,
-        )
+        self.realm_admin
+            .admin
+            .realm_clients_get(
+                self.realm_admin.realm,
+                client_id,
+                first,
+                max,
+                q,
+                search,
+                viewable_only,
+            )
     }
 }
 
@@ -905,10 +967,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -948,8 +1007,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -960,10 +1018,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1003,8 +1058,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1015,10 +1069,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1039,7 +1090,10 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { scope, user_id }: Self::Args,
+        Self::Args {
+            scope,
+            user_id,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1052,8 +1106,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1064,8 +1117,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS: KeycloakTokenSupplier>
-{
+pub struct RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1085,7 +1137,9 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { scope }: Self::Args,
+        Self::Args {
+            scope,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1108,10 +1162,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1129,12 +1180,13 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
 {
     type Output = TypeVec<RoleRepresentation>;
-    type Args =
-        RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGetArgs;
+    type Args = RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGetArgs;
 
     fn opts(
         self,
-        Self::Args { scope }: Self::Args,
+        Self::Args {
+            scope,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1147,8 +1199,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1159,10 +1210,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1172,24 +1220,21 @@ pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContaine
 }
 
 #[derive(Default)]
-pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGetArgs
-{
+pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGetArgs {
     pub scope: Option<String>,
 }
 
 impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
-    for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
-        'a,
-        TS,
-    >
+    for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<'a, TS>
 {
     type Output = TypeVec<RoleRepresentation>;
-    type Args =
-        RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGetArgs;
+    type Args = RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGetArgs;
 
     fn opts(
         self,
-        Self::Args { scope }: Self::Args,
+        Self::Args {
+            scope,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1202,11 +1247,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
-        'a,
-        TS,
-    >
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1240,7 +1281,10 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { first, max }: Self::Args,
+        Self::Args {
+            first,
+            max,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1287,7 +1331,10 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { first, max }: Self::Args,
+        Self::Args {
+            first,
+            max,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1313,300 +1360,283 @@ where
 
 #[cfg(feature = "builder")]
 mod builder {
-    use crate::builder::Builder;
+use crate::builder::Builder;
 
-    use super::*;
+use super::*;
 
-    // <h4>Clients</h4>
-    impl<'a, TS> RealmClientsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// filter by clientId
-        pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().client_id(value)
-        }
-        /// the first result
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// the max results to return
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().q(value)
-        }
-        /// whether this is a search query or a getClientById query
-        pub fn search(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().search(value)
-        }
-        /// filter clients that cannot be viewed in full by admin
-        pub fn viewable_only(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().viewable_only(value)
-        }
+
+// <h4>Clients</h4>
+impl <'a, TS> RealmClientsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// filter by clientId
+    pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().client_id(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// filter by clientId
-        pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.client_id = value.into();
-            self
-        }
-        /// the first result
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// the max results to return
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.q = value.into();
-            self
-        }
-        /// whether this is a search query or a getClientById query
-        pub fn search(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.search = value.into();
-            self
-        }
-        /// filter clients that cannot be viewed in full by admin
-        pub fn viewable_only(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.viewable_only = value.into();
-            self
-        }
+    /// the first result
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().audience(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().user_id(value)
-        }
+    /// the max results to return
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.audience = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.user_id = value.into();
-            self
-        }
+    pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().q(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().audience(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().user_id(value)
-        }
+    /// whether this is a search query or a getClientById query
+    pub fn search(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().search(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.audience = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.user_id = value.into();
-            self
-        }
+    /// filter clients that cannot be viewed in full by admin
+    pub fn viewable_only(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().viewable_only(value)
     }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().user_id(value)
-        }
+impl<TS> Builder<'_, RealmClientsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// filter by clientId
+    pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.client_id = value.into();
+        self
     }
+    /// the first result
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// the max results to return
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.q = value.into();
+        self
+    }
+    /// whether this is a search query or a getClientById query
+    pub fn search(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.search = value.into();
+        self
+    }
+    /// filter clients that cannot be viewed in full by admin
+    pub fn viewable_only(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.viewable_only = value.into();
+        self
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.user_id = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().audience(value)
     }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().user_id(value)
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.audience = value.into();
+        self
     }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.user_id = value.into();
+        self
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().audience(value)
     }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().user_id(value)
+    }
+}
 
-    impl<'a, TS>
-        RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.audience = value.into();
+        self
     }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.user_id = value.into();
+        self
+    }
+}
 
-    impl<TS>
-        Builder<
-            '_,
-            RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<
-                '_,
-                TS,
-            >,
-        >
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
     }
+    pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().user_id(value)
+    }
+}
 
-    impl<'a, TS>
-        RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
-            'a,
-            TS,
-        >
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
     }
+    pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.user_id = value.into();
+        self
+    }
+}
 
-    impl<TS>
-        Builder<
-            '_,
-            RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
-                '_,
-                TS,
-            >,
-        >
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
     }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidOfflineSessionsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Paging offset
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
     }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidOfflineSessionsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Paging offset
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
     }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidUserSessionsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Paging offset
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
     }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidUserSessionsGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        /// Paging offset
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        /// Maximum results size (defaults to 100)
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
+impl <'a, TS> RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
     }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientsWithClientUuidOfflineSessionsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Paging offset
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidOfflineSessionsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Paging offset
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientsWithClientUuidUserSessionsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Paging offset
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidUserSessionsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    /// Paging offset
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    /// Maximum results size (defaults to 100)
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+}
+
 }

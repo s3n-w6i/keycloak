@@ -11,7 +11,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/keys`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmkeys>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmkeys>
     pub async fn realm_keys_get(
         &self,
         realm: &str,
@@ -19,11 +19,15 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(format!("{}/admin/realms/{realm}/keys", self.url))
+            .get(format!(
+                "{}/admin/realms/{realm}/keys",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
+
 }
 // not all paths processed
-// left 255
+// left 264

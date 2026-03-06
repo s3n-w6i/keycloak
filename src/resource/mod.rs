@@ -49,9 +49,6 @@ pub mod key;
 /// Organizations
 #[cfg(feature = "tag-organizations")]
 pub mod organizations;
-/// Other (non tagged) methods
-#[cfg(feature = "tag-none")]
-pub mod other_methods;
 /// Protocol Mappers
 #[cfg(feature = "tag-protocol-mappers")]
 pub mod protocol_mappers;
@@ -76,3 +73,6 @@ pub mod users;
 /// Workflows
 #[cfg(feature = "tag-workflows")]
 pub mod workflows;
+/// Other (non tagged) methods
+#[cfg(feature = "tag-none")]
+pub mod other_methods;

@@ -9,16 +9,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_server>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_server>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server`
     pub fn clients_with_client_uuid_authz_resource_server_get(
         &'a self,
         client_uuid: &'a str,
-    ) -> impl Future<Output = Result<ResourceServerRepresentation, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ResourceServerRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_authz_resource_server_get(self.realm, client_uuid)
+            .realm_clients_with_client_uuid_authz_resource_server_get(
+                self.realm,
+                client_uuid,
+            )
     }
 
     /// Parameters:
@@ -31,7 +33,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_server>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_server>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server`
     pub fn clients_with_client_uuid_authz_resource_server_put(
@@ -40,7 +42,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         body: ResourceServerRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin
-            .realm_clients_with_client_uuid_authz_resource_server_put(self.realm, client_uuid, body)
+            .realm_clients_with_client_uuid_authz_resource_server_put(
+                self.realm,
+                client_uuid,
+                body,
+            )
     }
 
     /// Parameters:
@@ -53,7 +59,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/import`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverimport>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverimport>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/import`
     pub fn clients_with_client_uuid_authz_resource_server_import_post(
@@ -87,7 +93,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission`
     pub fn clients_with_client_uuid_authz_resource_server_permission_get(
@@ -110,7 +116,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission`
     pub fn clients_with_client_uuid_authz_resource_server_permission_post(
@@ -134,7 +140,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/evaluate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionevaluate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionevaluate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/evaluate`
     pub fn clients_with_client_uuid_authz_resource_server_permission_evaluate_post(
@@ -157,14 +163,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionproviders>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/providers`
     pub fn clients_with_client_uuid_authz_resource_server_permission_providers_get(
         &'a self,
         client_uuid: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<PolicyProviderRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<PolicyProviderRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_authz_resource_server_permission_providers_get(
                 self.realm,
@@ -181,7 +186,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionsearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionsearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/search`
     pub fn clients_with_client_uuid_authz_resource_server_permission_search_get(
@@ -212,7 +217,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy`
     pub fn clients_with_client_uuid_authz_resource_server_policy_get(
@@ -235,7 +240,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy`
     pub fn clients_with_client_uuid_authz_resource_server_policy_post(
@@ -259,7 +264,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/evaluate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyevaluate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyevaluate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/evaluate`
     pub fn clients_with_client_uuid_authz_resource_server_policy_evaluate_post(
@@ -282,14 +287,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyproviders>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/providers`
     pub fn clients_with_client_uuid_authz_resource_server_policy_providers_get(
         &'a self,
         client_uuid: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<PolicyProviderRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<PolicyProviderRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_authz_resource_server_policy_providers_get(
                 self.realm,
@@ -306,7 +310,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicysearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicysearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/search`
     pub fn clients_with_client_uuid_authz_resource_server_policy_search_get(
@@ -337,7 +341,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource`
     pub fn clients_with_client_uuid_authz_resource_server_resource_get(
@@ -369,7 +373,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource`
     pub fn clients_with_client_uuid_authz_resource_server_resource_post(
@@ -402,7 +406,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourcesearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourcesearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/search`
     pub fn clients_with_client_uuid_authz_resource_server_resource_search_get(
@@ -434,7 +438,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_get(
@@ -471,7 +475,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_put(
@@ -509,7 +513,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_delete(
@@ -545,15 +549,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/attributes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idattributes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idattributes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/attributes`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_attributes_get(
         &'a self,
         client_uuid: &'a str,
         resource_id: &'a str,
-    ) -> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS>
-    {
+    ) -> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS> {
         RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet {
             realm_admin: self,
             client_uuid,
@@ -580,15 +583,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/permissions`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_permissions_get(
         &'a self,
         client_uuid: &'a str,
         resource_id: &'a str,
-    ) -> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS>
-    {
+    ) -> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS> {
         RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet {
             realm_admin: self,
             client_uuid,
@@ -615,7 +617,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idscopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idscopes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/scopes`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_scopes_get(
@@ -641,7 +643,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope`
     pub fn clients_with_client_uuid_authz_resource_server_scope_get(
@@ -664,7 +666,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope`
     pub fn clients_with_client_uuid_authz_resource_server_scope_post(
@@ -688,7 +690,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopesearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopesearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/search`
     pub fn clients_with_client_uuid_authz_resource_server_scope_search_get(
@@ -709,7 +711,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_get(
@@ -736,7 +738,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_put(
@@ -764,7 +766,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_delete(
@@ -788,15 +790,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/permissions`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_permissions_get(
         &'a self,
         client_uuid: &'a str,
         scope_id: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<PolicyRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<PolicyRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_authz_resource_server_scope_with_scope_id_permissions_get(
                 self.realm,
@@ -813,15 +814,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/resources`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idresources>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idresources>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/resources`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_resources_get(
         &'a self,
         client_uuid: &'a str,
         scope_id: &'a str,
-    ) -> impl Future<Output = Result<TypeVec<ResourceRepresentation>, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<TypeVec<ResourceRepresentation>, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_authz_resource_server_scope_with_scope_id_resources_get(
                 self.realm,
@@ -837,25 +837,24 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/settings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serversettings>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.5/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serversettings>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/settings`
     pub fn clients_with_client_uuid_authz_resource_server_settings_get(
         &'a self,
         client_uuid: &'a str,
-    ) -> impl Future<Output = Result<ResourceServerRepresentation, KeycloakError>> + use<'a, TS>
-    {
+    ) -> impl Future<Output = Result<ResourceServerRepresentation, KeycloakError>> + use<'a, TS> {
         self.admin
             .realm_clients_with_client_uuid_authz_resource_server_settings_get(
                 self.realm,
                 client_uuid,
             )
     }
+
 }
 
 // <h4>default</h4>
-pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'a, TS: KeycloakTokenSupplier>
-{
+pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -930,10 +929,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -954,7 +950,10 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { fields, name }: Self::Args,
+        Self::Args {
+            fields,
+            name,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1053,10 +1052,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1077,7 +1073,10 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { fields, name }: Self::Args,
+        Self::Args {
+            fields,
+            name,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1176,8 +1175,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourcePost<'a, TS: KeycloakTokenSupplier>
-{
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourcePost<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1254,10 +1252,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1332,10 +1327,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1401,8 +1393,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1413,10 +1404,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1484,8 +1472,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1496,10 +1483,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1565,8 +1549,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1577,10 +1560,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1607,8 +1587,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS>
 {
     type Output = DefaultResponse;
-    type Args =
-        RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGetArgs;
+    type Args = RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGetArgs;
 
     fn opts(
         self,
@@ -1647,8 +1626,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1659,10 +1637,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1689,8 +1664,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS>
 {
     type Output = TypeVec<PolicyRepresentation>;
-    type Args =
-        RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGetArgs;
+    type Args = RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGetArgs;
 
     fn opts(
         self,
@@ -1729,8 +1703,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1741,10 +1714,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1810,8 +1780,7 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     }
 }
 
-impl<'a, TS> IntoFuture
-    for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'a, TS>
+impl<'a, TS> IntoFuture for RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'a, TS>
 where
     TS: KeycloakTokenSupplier + Send + Sync,
 {
@@ -1876,10 +1845,7 @@ where
     }
 }
 
-pub struct RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<
-    'a,
-    TS: KeycloakTokenSupplier,
-> {
+pub struct RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     /// id of client (not client-id!)
@@ -1899,7 +1865,9 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
 
     fn opts(
         self,
-        Self::Args { name }: Self::Args,
+        Self::Args {
+            name,
+        }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
         self.realm_admin
             .admin
@@ -1924,1122 +1892,1100 @@ where
 
 #[cfg(feature = "builder")]
 mod builder {
-    use crate::builder::Builder;
+use crate::builder::Builder;
 
-    use super::*;
+use super::*;
 
-    // <h4>default</h4>
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().fields(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn permission(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().permission(value)
-        }
-        pub fn policy_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().policy_id(value)
-        }
-        pub fn resource(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().resource(value)
-        }
-        pub fn resource_type(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().resource_type(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
+
+// <h4>default</h4>
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().fields(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.fields = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn permission(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.permission = value.into();
-            self
-        }
-        pub fn policy_id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.policy_id = value.into();
-            self
-        }
-        pub fn resource(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.resource = value.into();
-            self
-        }
-        pub fn resource_type(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.resource_type = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().fields(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.fields = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().fields(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn permission(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().permission(value)
-        }
-        pub fn policy_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().policy_id(value)
-        }
-        pub fn resource(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().resource(value)
-        }
-        pub fn resource_type(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().resource_type(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.fields = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn permission(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.permission = value.into();
-            self
-        }
-        pub fn policy_id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.policy_id = value.into();
-            self
-        }
-        pub fn resource(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.resource = value.into();
-            self
-        }
-        pub fn resource_type(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.resource_type = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
+    pub fn permission(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().permission(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().fields(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
+    pub fn policy_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().policy_id(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.fields = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
+    pub fn resource(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().resource(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+    pub fn resource_type(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().resource_type(value)
     }
-
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
     }
-
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourcePost<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
     }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourcePost<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.fields = value.into();
+        self
     }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn permission(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.permission = value.into();
+        self
+    }
+    pub fn policy_id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.policy_id = value.into();
+        self
+    }
+    pub fn resource(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.resource = value.into();
+        self
+    }
+    pub fn resource_type(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.resource_type = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().fields(value)
     }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.fields = value.into();
+        self
     }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().fields(value)
     }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn permission(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().permission(value)
+    }
+    pub fn policy_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().policy_id(value)
+    }
+    pub fn resource(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().resource(value)
+    }
+    pub fn resource_type(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().resource_type(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.fields = value.into();
+        self
     }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn permission(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.permission = value.into();
+        self
+    }
+    pub fn policy_id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.policy_id = value.into();
+        self
+    }
+    pub fn resource(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.resource = value.into();
+        self
+    }
+    pub fn resource_type(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.resource_type = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().fields(value)
     }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.fields = value.into();
+        self
     }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
     }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
 
-    impl<TS>
-        Builder<
-            '_,
-            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'_, TS>,
-        >
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
     }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
 
-    impl<'a, TS>
-        RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourcePost<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
     }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
 
-    impl<TS>
-        Builder<
-            '_,
-            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<
-                '_,
-                TS,
-            >,
-        >
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourcePost<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
     }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
 
-    impl<'a, TS>
-        RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
     }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
 
-    impl<TS>
-        Builder<
-            '_,
-            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<
-                '_,
-                TS,
-            >,
-        >
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
     }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().id(value)
-        }
-        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().deep(value)
-        }
-        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().exact_name(value)
-        }
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
-            self.builder().matching_uri(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().owner(value)
-        }
-        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope(value)
-        }
-        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().type_(value)
-        }
-        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().uri(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
     }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
 
-    impl<TS>
-        Builder<
-            '_,
-            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'_, TS>,
-        >
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.id = value.into();
-            self
-        }
-        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.deep = value.into();
-            self
-        }
-        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.exact_name = value.into();
-            self
-        }
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
-            self.args.matching_uri = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.owner = value.into();
-            self
-        }
-        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope = value.into();
-            self
-        }
-        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.type_ = value.into();
-            self
-        }
-        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.uri = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
     }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerScopeGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().first(value)
-        }
-        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
-            self.builder().max(value)
-        }
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
-        pub fn scope_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().scope_id(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
     }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerScopeGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.first = value.into();
-            self
-        }
-        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
-            self.args.max = value.into();
-            self
-        }
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
-        pub fn scope_id(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.scope_id = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
     }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
 
-    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<'a, TS>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
-            self.builder().name(value)
-        }
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
     }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
 
-    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<'_, TS>>
-    where
-        TS: KeycloakTokenSupplier + Send + Sync,
-    {
-        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
-            self.args.name = value.into();
-            self
-        }
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
     }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
+    }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
+    }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
+    }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
+    }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().id(value)
+    }
+    pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().deep(value)
+    }
+    pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().exact_name(value)
+    }
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+        self.builder().matching_uri(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().owner(value)
+    }
+    pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope(value)
+    }
+    pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().type_(value)
+    }
+    pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().uri(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.id = value.into();
+        self
+    }
+    pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.deep = value.into();
+        self
+    }
+    pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.exact_name = value.into();
+        self
+    }
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+        self.args.matching_uri = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.owner = value.into();
+        self
+    }
+    pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope = value.into();
+        self
+    }
+    pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.type_ = value.into();
+        self
+    }
+    pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.uri = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerScopeGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().first(value)
+    }
+    pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+        self.builder().max(value)
+    }
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+    pub fn scope_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().scope_id(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerScopeGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.first = value.into();
+        self
+    }
+    pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+        self.args.max = value.into();
+        self
+    }
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+    pub fn scope_id(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.scope_id = value.into();
+        self
+    }
+}
+
+impl <'a, TS> RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+        self.builder().name(value)
+    }
+}
+
+impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<'_, TS>>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+        self.args.name = value.into();
+        self
+    }
+}
+
 }
